@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file contains the Controls_Toolbar_Block
+ * This file contains the \QUI\Controls\Toolbar\Block
  */
 
 namespace QUI\Controls\Toolbar;

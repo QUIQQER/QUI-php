@@ -19,7 +19,7 @@ class Window extends \QUI\QDOM
      * control type
      * @var String
      */
-    protected $_TYPE = '\QUI\Controls\Windows\Window';
+    protected $_TYPE = 'QUI\\Controls\\Windows\\Window';
 
     /**
      * categories - \QUI\Controls\Buttons\Button

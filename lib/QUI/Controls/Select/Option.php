@@ -20,7 +20,7 @@ class Option extends \QUI\QDOM
 {
     /**
      * Parent object
-     * @var Controls_Select_Select
+     * @var \QUI\Controls\Select\Select
      */
     private $_parent;
 

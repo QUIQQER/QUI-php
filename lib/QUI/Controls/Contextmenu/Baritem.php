@@ -43,7 +43,7 @@ Class Baritem extends \QUI\QDOM
     public function __construct(array $settings)
     {
         $this->setAttributes( $settings );
-        $this->setAttribute( 'type', '\\QUI\\Controls\\Contextmenu\\Baritem' );
+        $this->setAttribute( 'type', 'QUI\\Controls\\Contextmenu\\Baritem' );
     }
 
     /**

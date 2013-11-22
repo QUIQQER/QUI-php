@@ -40,7 +40,7 @@ class Button extends \QUI\QDOM
      */
     public function __construct($settings=array())
     {
-        $this->setAttribute( 'type', 'QUI.controls.buttons.Button' );
+        $this->setAttribute( 'type', 'QUI\\Controls\\Buttons\\Button' );
         $this->setAttributes( $settings );
     }
 

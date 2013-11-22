@@ -44,7 +44,7 @@ Class Menuitem extends \QUI\QDOM
     public function __construct(array $settings)
     {
         $this->setAttributes( $settings );
-        $this->setAttribute( 'type', '\\QUI\\Controls\\Contextmenu\\Menuitem' );
+        $this->setAttribute( 'type', 'QUI\\Controls\\Contextmenu\\Menuitem' );
     }
 
     /**
@@ -54,17 +54,17 @@ Class Menuitem extends \QUI\QDOM
      */
     public function addParent($parent)
     {
-        if ( get_class( $parent ) == '\\QUI\\Controls\\Buttons\\Button' ||
-             get_class( $parent ) == '\\QUI\\Controls\\Contextmenu\\Baritem' ||
-             get_class( $parent ) == '\\QUI\\Controls\\Contextmenu\\Menuitem' )
+        if ( get_class( $parent ) == 'QUI\\Controls\\Buttons\\Button' ||
+             get_class( $parent ) == 'QUI\\Controls\\Contextmenu\\Baritem' ||
+             get_class( $parent ) == 'QUI\\Controls\\Contextmenu\\Menuitem' )
         {
             $this->_parent = $parent;
             return true;
         }
 
-        throw new Exception(
+        throw new \QUI\Exception(
             'Argument 1 passed to ContextMenuItem::addParent()
-             must be an instance of \\QUI\\Controls\\Buttons\\Button or \\QUI\\Controls\\Contextmenu\\Bar '.
+             must be an instance of QUI\\Controls\\Buttons\\Button or QUI\\Controls\\Contextmenu\\Bar '.
             get_class( $parent ).' given'
         );
     }
@@ -93,8 +93,8 @@ Class Menuitem extends \QUI\QDOM
      */
     public function appendChild($child)
     {
-        if ( get_class( $child ) == '\\QUI\\Controls\\Contextmenu\\Menuitem' ||
-             get_class( $child ) == '\\QUI\\Controls\\Contextmenu\\Seperator' )
+        if ( get_class( $child ) == 'QUI\\Controls\\Contextmenu\\Menuitem' ||
+             get_class( $child ) == 'QUI\\Controls\\Contextmenu\\Seperator' )
         {
             $this->_items[] = $child;
         }

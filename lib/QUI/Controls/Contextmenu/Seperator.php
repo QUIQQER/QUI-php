@@ -31,19 +31,21 @@ class Seperator extends \QUI\QDOM
     public function __construct(array $settings)
     {
         $this->setAttributes( $settings );
-        $this->setAttribute( 'type', '\\QUI\\Controls\\Contextmenu\\Seperator' );
+        $this->setAttribute( 'type', 'QUI\\Controls\\Contextmenu\\Seperator' );
     }
 
     /**
      * Parent setzen
      *
-     * @param Controls_Buttons_Button|Controls_Contextmenu_Baritem|Controls_Contextmenu_Menuitem $parent
+     * @param \QUI\Controls\Buttons\Button|
+     * 		  \QUI\Controls\Contextmenu\Baritem|
+     * 		  \QUI\Controls\Contextmenu\Menuitem $parent
      */
     public function addParent($parent)
     {
-        if ( get_class( $parent ) == '\\QUI\\Controls\\Buttons\\Button' ||
-             get_class( $parent ) == '\\QUI\\Controls\\Contextmenu\\Baritem' ||
-             get_class( $parent ) == '\\QUI\\Controls\\Contextmenu\\Menuitem' )
+        if ( get_class( $parent ) == 'QUI\\Controls\\Buttons\\Button' ||
+             get_class( $parent ) == 'QUI\\Controls\\Contextmenu\\Baritem' ||
+             get_class( $parent ) == 'QUI\\Controls\\Contextmenu\\Menuitem' )
         {
             $this->_parent = $parent;
             return true;

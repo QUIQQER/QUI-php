@@ -29,15 +29,15 @@ class Bar extends \QUI\QDOM
     public function __construct(array $settings)
     {
         $this->setAttributes( $settings );
-        $this->setAttribute( 'type', '\\QUI\\Controls\\Contextmenu\\Bar' );
+        $this->setAttribute( 'type', 'QUI\\Controls\\Contextmenu\\Bar' );
     }
 
     /**
      * Ein ContextBarItem in die ContextBar hinzufügen
      *
-     * @param \QUI\Contols\Contextmenu\ $Itm
+     * @param \QUI\Controls\Contextmenu\ $Itm
      */
-    public function appendChild(\QUI\Contols\Contextmenu\Baritem $Itm)
+    public function appendChild(\QUI\Controls\Contextmenu\Baritem $Itm)
     {
         $this->_items[] = $Itm;
     }

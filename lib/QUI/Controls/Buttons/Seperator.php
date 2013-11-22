@@ -4,7 +4,7 @@
  * This file contains the \QUI\Controls\Buttons
  */
 
-namespace QUI\Controls\Buttons\Seperator;
+namespace QUI\Controls\Buttons;
 
 /**
  * Button Seperator
@@ -34,7 +34,7 @@ class Seperator extends \QUI\QDOM
      */
     public function __construct(array $settings)
     {
-        $this->setAttribute('type', 'QUI.controls.buttons.Seperator');
+        $this->setAttribute('type', 'QUI\\Controls\\Buttons\\Seperator');
         $this->setAttributes($settings);
     }
 
@@ -65,7 +65,7 @@ class Seperator extends \QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var '. $this->getAttribute('name') .' = '. $this->jsObject() .';';
+        $jsString  = 'var '. $this->getAttribute('name') .' = '. $this->jsObject() .';';
         $jsString .= $this->_parent->getName().'.appendChild( '. $this->getAttribute('name') .' );';
 
         return $jsString;
