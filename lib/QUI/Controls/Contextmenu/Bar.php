@@ -29,7 +29,7 @@ class Bar extends \QUI\QDOM
     public function __construct(array $settings)
     {
         $this->setAttributes( $settings );
-        $this->setAttribute( 'type', 'QUI\\Controls\\Contextmenu\\Bar' );
+        $this->setAttribute( 'type', 'qui/controls/contextmenu/Bar' );
     }
 
     /**

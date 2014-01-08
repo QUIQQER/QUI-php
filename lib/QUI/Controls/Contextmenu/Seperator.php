@@ -31,7 +31,7 @@ class Seperator extends \QUI\QDOM
     public function __construct(array $settings)
     {
         $this->setAttributes( $settings );
-        $this->setAttribute( 'type', 'QUI\\Controls\\Contextmenu\\Seperator' );
+        $this->setAttribute( 'type', 'qui/controls/contextmenu/Seperator' );
     }
 
     /**

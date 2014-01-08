@@ -41,10 +41,10 @@ Class Menuitem extends \QUI\QDOM
      * $settings['name'] = Name vom JavaScript Objekt
      * $settings['image'] = Menubild
      */
-    public function __construct(array $settings)
+    public function __construct($settings=array())
     {
         $this->setAttributes( $settings );
-        $this->setAttribute( 'type', 'QUI\\Controls\\Contextmenu\\Menuitem' );
+        $this->setAttribute( 'type', 'qui/controls/contextmenu/Item' );
     }
 
     /**
@@ -172,6 +172,7 @@ Class Menuitem extends \QUI\QDOM
         $result = $this->getAllAttributes();
         $result['items'] = array();
 
+        /*
         if ( $this->getAttribute( 'onClick' ) ) {
             $result['events']['onClick'] = $this->getAttribute( 'onClick' );
         }
@@ -183,6 +184,7 @@ Class Menuitem extends \QUI\QDOM
         if ( $this->getAttribute( 'onMouseUp' ) ) {
             $result['events']['onMouseUp'] = $this->getAttribute( 'onMouseUp' );
         }
+        */
 
         foreach ( $this->_items as $Itm )
         {
