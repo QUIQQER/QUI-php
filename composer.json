@@ -2,7 +2,7 @@
     "name" : "quiqqer/qui-php",
     "type" : "library",
     "description" : "QUI - PHP Controls",
-    "version" : "dev-master",
+    "version" : "dev-dev",
     "license" : "GPL-3.0+",
 
     "authors" : [{
@@ -24,7 +24,7 @@
 
     "require": {
         "php" : ">=5.3",
-        "quiqqer/utils" : "dev-master"
+        "quiqqer/utils" : "*@dev"
     },
 
     "autoload": {
