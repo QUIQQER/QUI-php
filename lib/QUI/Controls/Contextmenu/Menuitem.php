@@ -113,6 +113,24 @@ Class Menuitem extends \QUI\QDOM
     }
 
     /**
+     * Gibt ein Kind per Namen zurück
+     *
+     * @param String $name - Name des Menüeintrages
+     * @return Bool | QUI\Controls\Contextmenu\Item
+     */
+    public function getElementByName($name)
+    {
+        foreach ( $this->_items as $Item )
+        {
+            if ( $name == $Item->getName() ) {
+                return $Item;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Namen vom Objekt bekommen
      *
      * @return String
