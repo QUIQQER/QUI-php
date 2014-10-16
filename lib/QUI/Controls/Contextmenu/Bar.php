@@ -81,6 +81,29 @@ class Bar extends \QUI\QDOM
     }
 
     /**
+     * Return a children by path
+     *
+     * @param String $path - /child/child/child/
+     * @return Ambigous <\QUI\Controls\Contextmenu\Bar, boolean, unknown>
+     */
+    public function getElementByPath($path)
+    {
+        $path   = explode( '/', $path );
+        $Parent = $this;
+
+        foreach ( $path as $parent )
+        {
+            $_Parent = $Parent->getElementByName( $parent );
+
+            if ( $_Parent ) {
+                $Parent = $_Parent;
+            }
+        }
+
+        return $Parent;
+    }
+
+    /**
      * Menü als Array bekommen
      *
      * @return Array
