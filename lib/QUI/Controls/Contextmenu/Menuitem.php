@@ -6,6 +6,8 @@
 
 namespace QUI\Controls\Contextmenu;
 
+use QUI;
+
 /**
  * ContextMenuItem
  *
@@ -13,7 +15,7 @@ namespace QUI\Controls\Contextmenu;
  * @package com.pcsg.qui.controls.contextmenu
  */
 
-Class Menuitem extends \QUI\QDOM
+Class Menuitem extends QUI\QDOM
 {
     /**
      * subitems
@@ -23,7 +25,7 @@ Class Menuitem extends \QUI\QDOM
 
     /**
      * Parent Object
-     * @var \QUI\Controls\Control
+     * @var \QUI\Controls\Contextmenu\Bar
      */
     private $_parent = null;
 
@@ -50,7 +52,9 @@ Class Menuitem extends \QUI\QDOM
     /**
      * Parent setzen
      *
-     * @param ContextBarItem || Button $parent
+     * @param \QUI\Controls\Contextmenu\Baritem | \QUI\Controls\Buttons\Button $parent
+     * @return Bool
+     * @throws \QUI\Exception
      */
     public function addParent($parent)
     {
@@ -62,7 +66,7 @@ Class Menuitem extends \QUI\QDOM
             return true;
         }
 
-        throw new \QUI\Exception(
+        throw new QUI\Exception(
             'Argument 1 passed to ContextMenuItem::addParent()
              must be an instance of QUI\\Controls\\Buttons\\Button or QUI\\Controls\\Contextmenu\\Bar '.
             get_class( $parent ).' given'
@@ -90,6 +94,7 @@ Class Menuitem extends \QUI\QDOM
      * Ein Kind hinzufügen
      *
      * @param \QUI\Controls\Contextmenu\Menuitem|\QUI\Controls\Contextmenu\Seperator $child
+     * @return \QUI\Controls\Contextmenu\Menuitem (this)
      */
     public function appendChild($child)
     {
@@ -116,7 +121,7 @@ Class Menuitem extends \QUI\QDOM
      * Gibt ein Kind per Namen zurück
      *
      * @param String $name - Name des Menüeintrages
-     * @return Bool | QUI\Controls\Contextmenu\Item
+     * @return Bool | \QUI\Controls\Contextmenu\Menuitem
      */
     public function getElementByName($name)
     {
@@ -187,7 +192,7 @@ Class Menuitem extends \QUI\QDOM
      */
     public function toArray()
     {
-        $result = $this->getAllAttributes();
+        $result = $this->getAttributes();
         $result['items'] = array();
 
         /*

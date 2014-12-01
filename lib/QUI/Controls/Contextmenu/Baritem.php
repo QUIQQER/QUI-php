@@ -70,6 +70,7 @@ Class Baritem extends \QUI\QDOM
      * Ein ContextMenuItem hinzufügen
      *
      * @param \QUI\Controls\Contextmenu\Menuitem $itm
+     * @return \QUI\Controls\Contextmenu\Baritem (this)
      */
     public function appendChild($itm)
     {
@@ -97,7 +98,7 @@ Class Baritem extends \QUI\QDOM
      * Gibt ein Kind per Namen zurück
      *
      * @param String $name - Name des Menüeintrages
-     * @return Bool | ContextMenuItem
+     * @return Bool|\QUI\Controls\Contextmenu\Baritem
      */
     public function getElementByName($name)
     {

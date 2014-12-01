@@ -42,8 +42,11 @@ class Bar
     /**
      * Fügt ein Kind ein
      *
-     * @param \QUI\Controls\Sitemap\Item|\QUI\Controls\Toolbar\Tab $itm
-     * @return this
+     * @param \QUI\Controls\Sitemap\Item|
+     *        \QUI\Controls\Toolbar\Tab|
+     *        \QUI\Controls\Buttons\Button|
+     *        \QUI\Controls\Buttons\Seperator $itm
+     * @return \QUI\Controls\Toolbar\Bar this
      */
     public function appendChild($itm)
     {
@@ -74,7 +77,7 @@ class Bar
     /**
      * Gibt die Items zurück
      *
-     * @return unknown
+     * @return array
      */
     public function getItems()
     {
@@ -84,7 +87,7 @@ class Bar
     /**
      * Erstellt den JavaScriptbereich um eine ContextBar mit seinen Kindern aufzubauen
      *
-     * @return unknown
+     * @return string
      */
     public function create()
     {
@@ -126,7 +129,7 @@ class Bar
      * Sucht ein Item in der Toolbar nach dem Namen und gibt dieses zurück
      *
      * @param String $name
-     * @return Bool false || ToolbarItem
+     * @return Bool|\QUI\Controls\Sitemap\Item|\QUI\Controls\Toolbar\Tab|\QUI\Controls\Buttons\Button|\QUI\Controls\Buttons\Seperator
      */
     public function getElementByName($name)
     {
@@ -160,7 +163,7 @@ class Bar
     /**
      * Gibt das erste Kind zurück
      *
-     * @return unknown
+     * @return object
      */
     public function firstChild()
     {

@@ -6,6 +6,8 @@
 
 namespace QUI\Controls\Buttons;
 
+use QUI;
+
 /**
  * QUI Button
  *
@@ -13,11 +15,11 @@ namespace QUI\Controls\Buttons;
  * @package com.pcsg.qui.controls.buttons
  */
 
-class Button extends \QUI\QDOM
+class Button extends QUI\QDOM
 {
     /**
      * The Parent
-     * @var \QUI\Controls\Control
+     * @var object
      */
     private $_parent;
 
@@ -77,7 +79,7 @@ class Button extends \QUI\QDOM
      *
      * @param \QUI\Controls\Contextmenu\Menuitem $mitem
      */
-    public function appendChild(\QUI\Controls\Contextmenu\Menuitem $mitem)
+    public function appendChild(QUI\Controls\Contextmenu\Menuitem $mitem)
     {
         $this->_items[] = $mitem;
     }
@@ -89,11 +91,12 @@ class Button extends \QUI\QDOM
      */
     public function toArray()
     {
-        $result = $this->getAllAttributes();
+        $result = $this->getAttributes();
         $result['items'] = array();
 
         foreach ( $this->_items as $Itm )
         {
+            /* @var $Itm QUI\Controls\Contextmenu\Menuitem */
             $Itm->addParent( $this );
             $result['items'][] = $Itm->toArray();
         }

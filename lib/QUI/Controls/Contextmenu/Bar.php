@@ -35,9 +35,9 @@ class Bar extends \QUI\QDOM
     /**
      * Ein ContextBarItem in die ContextBar hinzufügen
      *
-     * @param \QUI\Controls\Contextmenu\ $Itm
+     * @param Baritem $Itm
      */
-    public function appendChild(\QUI\Controls\Contextmenu\Baritem $Itm)
+    public function appendChild(Baritem $Itm)
     {
         $this->_items[] = $Itm;
     }
@@ -56,7 +56,7 @@ class Bar extends \QUI\QDOM
      * Gibt ein Kind per Namen zurück
      *
      * @param String $name - Name des Menüeintrages
-     * @return Bool | ContextBarItem
+     * @return Bool | Baritem
      */
     public function getElementByName($name)
     {
@@ -74,7 +74,7 @@ class Bar extends \QUI\QDOM
      * Return a children by path
      *
      * @param String $path - /child/child/child/
-     * @return Ambigous <\QUI\Controls\Contextmenu\Bar, boolean, unknown>
+     * @return \QUI\Controls\Contextmenu\Bar
      */
     public function getElementByPath($path)
     {
@@ -114,7 +114,7 @@ class Bar extends \QUI\QDOM
 
         foreach ( $this->_items as $Itm )
         {
-            $Itm->addParent($this);
+            $Itm->addParent( $this );
             $result[] = $Itm->toArray();
         }
 

@@ -16,14 +16,8 @@ namespace QUI\Controls\Buttons;
 class Seperator extends \QUI\QDOM
 {
     /**
-     * the settings array
-     * @var array
-     */
-    private $_settings;
-
-    /**
      * the Parent Object
-     * @var \QUI\Controls\Control
+     * @var \QUI\Controls\Toolbar\Bar
      */
     private $_parent;
 
@@ -41,7 +35,7 @@ class Seperator extends \QUI\QDOM
     /**
      * Set the Parent
      *
-     * @param \Controls\Toolbar\Bar $Parent
+     * @param \QUI\Controls\Toolbar\Bar $Parent
      */
     public function addParent($Parent)
     {

@@ -6,6 +6,9 @@
 
 namespace QUI\Controls\Windows;
 
+use QUI;
+use QUI\Controls\Buttons\Button;
+
 /**
  * Window control class
  *
@@ -13,7 +16,7 @@ namespace QUI\Controls\Windows;
  * @package com.pcsg.qui.controls.windows
  */
 
-class Window extends \QUI\QDOM
+class Window extends QUI\QDOM
 {
     /**
      * control type
@@ -48,7 +51,7 @@ class Window extends \QUI\QDOM
      *
      * @param \QUI\Controls\Buttons\Button $Btn
      */
-    public function appendCategory(\QUI\Controls\Buttons\Button $Btn)
+    public function appendCategory(Button $Btn)
     {
         $this->_categories[] = $Btn;
     }
@@ -58,7 +61,7 @@ class Window extends \QUI\QDOM
      *
      * @param \QUI\Controls\Buttons\Button $Btn
      */
-    public function appendButton(\QUI\Controls\Buttons\Button $Btn)
+    public function appendButton(Button $Btn)
     {
         $this->_buttons[] = $Btn;
     }
@@ -70,7 +73,7 @@ class Window extends \QUI\QDOM
      */
     public function toArray()
     {
-        $result = $this->getAllAttributes();
+        $result = $this->getAttributes();
 
         $result['categories'] = array();
         $result['buttons']    = array();

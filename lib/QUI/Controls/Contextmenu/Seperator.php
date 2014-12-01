@@ -6,6 +6,8 @@
 
 namespace QUI\Controls\Contextmenu;
 
+use QUI;
+
 /**
  * \QUI\Controls\Contextmenu\Seperator
  *
@@ -13,7 +15,7 @@ namespace QUI\Controls\Contextmenu;
  * @package com.pcsg.qui.controls.contextmenu
  */
 
-class Seperator extends \QUI\QDOM
+class Seperator extends QUI\QDOM
 {
     /**
      * The Parent Object
@@ -37,9 +39,9 @@ class Seperator extends \QUI\QDOM
     /**
      * Parent setzen
      *
-     * @param \QUI\Controls\Buttons\Button|
-     * 		  \QUI\Controls\Contextmenu\Baritem|
-     * 		  \QUI\Controls\Contextmenu\Menuitem $parent
+     * @param \QUI\Controls\Buttons\Button|\QUI\Controls\Contextmenu\Baritem|\QUI\Controls\Contextmenu\Menuitem $parent
+     * @return Bool
+     * @throws QUI\Exception
      */
     public function addParent($parent)
     {
@@ -51,7 +53,7 @@ class Seperator extends \QUI\QDOM
             return true;
         }
 
-        throw new Exception(
+        throw new QUI\Exception(
             'Argument 1 passed to '. get_class( $this ) .'::addParent() must be an instance of Button or ContextBarItem '
         );
     }
@@ -84,7 +86,7 @@ class Seperator extends \QUI\QDOM
     /**
      * Enter description here...
      *
-     * @return unknown
+     * @return String
      */
     public function getHtml()
     {
@@ -94,10 +96,10 @@ class Seperator extends \QUI\QDOM
     /**
      * Enter description here...
      *
-     * @return unknown
+     * @return Array
      */
     public function toArray()
     {
-        return $this->getAllAttributes();
+        return $this->getAttributes();
     }
 }
