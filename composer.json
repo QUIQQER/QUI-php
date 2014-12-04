@@ -24,7 +24,7 @@
 
     "require": {
         "php" : ">=5.3",
-        "quiqqer/utils" : "0.9.*"
+        "quiqqer/utils" : "1.*"
     },
 
     "autoload": {
