@@ -6,17 +6,20 @@
 
 namespace QUI\Controls\Toolbar;
 
+use QUI;
+
 /**
  * A Toolbar Tab
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.toolbar
  */
 
-class Tab extends \QUI\QDOM
+class Tab extends QUI\QDOM
 {
     /**
      * The Parent object
+     *
      * @var \QUI\Controls\Control
      */
     private $_parent;
@@ -28,7 +31,7 @@ class Tab extends \QUI\QDOM
      */
     public function __construct(array $attributes)
     {
-        $this->setAttributes( $attributes );
+        $this->setAttributes($attributes);
     }
 
     /**
@@ -36,7 +39,7 @@ class Tab extends \QUI\QDOM
      *
      * @param \QUI\Controls\Toolbar\Bar $Parent
      */
-    public function addParent(\QUI\Controls\Toolbar\Bar $Parent)
+    public function addParent(QUI\Controls\Toolbar\Bar $Parent)
     {
         $this->_parent = $Parent;
     }
@@ -48,7 +51,7 @@ class Tab extends \QUI\QDOM
      */
     public function getName()
     {
-        return $this->getAttribute( 'name' );
+        return $this->getAttribute('name');
     }
 
     /**
@@ -58,7 +61,7 @@ class Tab extends \QUI\QDOM
      */
     public function onclick()
     {
-        return $this->getName() .'.onclick();';
+        return $this->getName().'.onclick();';
     }
 
     /**
@@ -68,8 +71,9 @@ class Tab extends \QUI\QDOM
      */
     public function create()
     {
-        $jsString  = 'var '. $this->getName() .' = '. $this->jsObject();
-        $jsString .= $this->_parent->getName() .'.appendChild( '. $this->getName() .' );';
+        $jsString = 'var '.$this->getName().' = '.$this->jsObject();
+        $jsString .= $this->_parent->getName().'.appendChild( '.$this->getName()
+            .' );';
 
         return $jsString;
     }
@@ -81,17 +85,16 @@ class Tab extends \QUI\QDOM
      */
     public function jsObject()
     {
-        $jsString   = 'new QUI.controls.toolbar.Tab({';
-        $attributes = $this->getAllAttributes();
+        $jsString = 'new QUI.controls.toolbar.Tab({';
+        $attributes = $this->getAttributes();
 
-        foreach ( $attributes as $s => $value )
-        {
-            if ( $s != 'name' ) {
-                $jsString .= $s .' : "'. $value .'",';
+        foreach ($attributes as $s => $value) {
+            if ($s != 'name') {
+                $jsString .= $s.' : "'.$value.'",';
             }
         }
 
-        $jsString .= 'name: "'. $this->getName() .'"';
+        $jsString .= 'name: "'.$this->getName().'"';
         $jsString .= '});';
 
         return $jsString;

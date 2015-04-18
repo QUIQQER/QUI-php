@@ -6,29 +6,33 @@
 
 namespace QUI\Controls\Contextmenu;
 
+use QUI;
+
 /**
  * ContextBarItem
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.contextmenu
  */
-
-Class Baritem extends \QUI\QDOM
+Class Baritem extends QUI\QDOM
 {
     /**
      * subitems
+     *
      * @var array
      */
     private $_items = array();
 
     /**
      * Parent Object
+     *
      * @var \QUI\Controls\Control
      */
     private $_parent = null;
 
     /**
      * Disable status
+     *
      * @var Bool
      */
     private $_disabled = false;
@@ -42,8 +46,8 @@ Class Baritem extends \QUI\QDOM
      */
     public function __construct(array $settings)
     {
-        $this->setAttributes( $settings );
-        $this->setAttribute( 'type', 'qui/controls/contextmenu/BarItem' );
+        $this->setAttributes($settings);
+        $this->setAttribute('type', 'qui/controls/contextmenu/BarItem');
     }
 
     /**
@@ -70,11 +74,13 @@ Class Baritem extends \QUI\QDOM
      * Ein ContextMenuItem hinzufügen
      *
      * @param \QUI\Controls\Contextmenu\Menuitem $itm
+     *
      * @return \QUI\Controls\Contextmenu\Baritem (this)
      */
     public function appendChild($itm)
     {
         $this->_items[] = $itm;
+
         return $this;
     }
 
@@ -98,13 +104,13 @@ Class Baritem extends \QUI\QDOM
      * Gibt ein Kind per Namen zurück
      *
      * @param String $name - Name des Menüeintrages
+     *
      * @return Bool|\QUI\Controls\Contextmenu\Baritem
      */
     public function getElementByName($name)
     {
-        foreach ( $this->_items as $itm )
-        {
-            if ( $name == $itm->getName() ) {
+        foreach ($this->_items as $itm) {
+            if ($name == $itm->getName()) {
                 return $itm;
             }
         }
@@ -122,8 +128,7 @@ Class Baritem extends \QUI\QDOM
         $result = $this->getAllAttributes();
         $result['items'] = array();
 
-        foreach ( $this->_items as $Itm )
-        {
+        foreach ($this->_items as $Itm) {
             $Itm->addParent($this);
             $result['items'][] = $Itm->toArray();
         }

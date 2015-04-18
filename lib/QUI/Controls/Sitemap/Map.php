@@ -6,6 +6,8 @@
 
 namespace QUI\Controls\Sitemap;
 
+use QUI;
+
 /**
  * Sitemap
  * Baut eine Sitemap
@@ -13,7 +15,7 @@ namespace QUI\Controls\Sitemap;
  * @author www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.sitemap
  */
-class Map extends \QUI\QDOM
+class Map extends QUI\QDOM
 {
     /**
      * Sub Items

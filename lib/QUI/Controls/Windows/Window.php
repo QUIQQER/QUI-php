@@ -12,26 +12,28 @@ use QUI\Controls\Buttons\Button;
 /**
  * Window control class
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.windows
  */
-
 class Window extends QUI\QDOM
 {
     /**
      * control type
+     *
      * @var String
      */
     protected $_TYPE = 'QUI\\Controls\\Windows\\Window';
 
     /**
      * categories - \QUI\Controls\Buttons\Button
+     *
      * @var array
      */
     protected $_categories = array();
 
     /**
      * buttons - \QUI\Controls\Buttons\Button
+     *
      * @var array
      */
     protected $_buttons = array();
@@ -41,9 +43,9 @@ class Window extends QUI\QDOM
      *
      * @param array $settings
      */
-    public function __construct($settings=array())
+    public function __construct($settings = array())
     {
-        $this->setAttributes( $settings );
+        $this->setAttributes($settings);
     }
 
     /**
@@ -76,17 +78,15 @@ class Window extends QUI\QDOM
         $result = $this->getAttributes();
 
         $result['categories'] = array();
-        $result['buttons']    = array();
+        $result['buttons'] = array();
 
-        foreach ( $this->_categories as $Itm )
-        {
-            $Itm->addParent( $this );
+        foreach ($this->_categories as $Itm) {
+            $Itm->addParent($this);
             $result['categories'][] = $Itm->toArray();
         }
 
-        foreach ( $this->_buttons as $Itm )
-        {
-            $Itm->addParent( $this );
+        foreach ($this->_buttons as $Itm) {
+            $Itm->addParent($this);
             $result['buttons'][] = $Itm->toArray();
         }
 

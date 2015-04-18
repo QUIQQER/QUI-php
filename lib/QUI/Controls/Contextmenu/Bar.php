@@ -6,17 +6,19 @@
 
 namespace QUI\Controls\Contextmenu;
 
+use QUI;
+
 /**
  * ContextBar
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.php.controls.contextmenu
  */
-
-class Bar extends \QUI\QDOM
+class Bar extends QUI\QDOM
 {
     /**
      * subitems
+     *
      * @var array
      */
     private $_items = array();
@@ -28,8 +30,8 @@ class Bar extends \QUI\QDOM
      */
     public function __construct(array $settings)
     {
-        $this->setAttributes( $settings );
-        $this->setAttribute( 'type', 'qui/controls/contextmenu/Bar' );
+        $this->setAttributes($settings);
+        $this->setAttribute('type', 'qui/controls/contextmenu/Bar');
     }
 
     /**
@@ -49,20 +51,20 @@ class Bar extends \QUI\QDOM
      */
     public function getName()
     {
-        return $this->getAttribute( 'name' );
+        return $this->getAttribute('name');
     }
 
     /**
      * Gibt ein Kind per Namen zurück
      *
      * @param String $name - Name des Menüeintrages
+     *
      * @return Bool | Baritem
      */
     public function getElementByName($name)
     {
-        foreach ( $this->_items as $Item )
-        {
-            if ( $name == $Item->getName() ) {
+        foreach ($this->_items as $Item) {
+            if ($name == $Item->getName()) {
                 return $Item;
             }
         }
@@ -74,18 +76,18 @@ class Bar extends \QUI\QDOM
      * Return a children by path
      *
      * @param String $path - /child/child/child/
+     *
      * @return \QUI\Controls\Contextmenu\Bar
      */
     public function getElementByPath($path)
     {
-        $path   = explode( '/', $path );
+        $path = explode('/', $path);
         $Parent = $this;
 
-        foreach ( $path as $parent )
-        {
-            $_Parent = $Parent->getElementByName( $parent );
+        foreach ($path as $parent) {
+            $_Parent = $Parent->getElementByName($parent);
 
-            if ( $_Parent ) {
+            if ($_Parent) {
                 $Parent = $_Parent;
             }
         }
@@ -112,9 +114,8 @@ class Bar extends \QUI\QDOM
     {
         $result = array();
 
-        foreach ( $this->_items as $Itm )
-        {
-            $Itm->addParent( $this );
+        foreach ($this->_items as $Itm) {
+            $Itm->addParent($this);
             $result[] = $Itm->toArray();
         }
 

@@ -11,26 +11,28 @@ use QUI;
 /**
  * QUI Button
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.buttons
  */
-
 class Button extends QUI\QDOM
 {
     /**
      * The Parent
+     *
      * @var object
      */
     private $_parent;
 
     /**
      * Sub Items
+     *
      * @var array
      */
     private $_items = array();
 
     /**
      * Disable status
+     *
      * @var Bool
      */
     private $_disabled = false;
@@ -40,10 +42,10 @@ class Button extends QUI\QDOM
      *
      * @param array $settings
      */
-    public function __construct($settings=array())
+    public function __construct($settings = array())
     {
-        $this->setAttribute( 'type', 'QUI\\Controls\\Buttons\\Button' );
-        $this->setAttributes( $settings );
+        $this->setAttribute('type', 'QUI\\Controls\\Buttons\\Button');
+        $this->setAttributes($settings);
     }
 
     /**
@@ -94,10 +96,9 @@ class Button extends QUI\QDOM
         $result = $this->getAttributes();
         $result['items'] = array();
 
-        foreach ( $this->_items as $Itm )
-        {
+        foreach ($this->_items as $Itm) {
             /* @var $Itm QUI\Controls\Contextmenu\Menuitem */
-            $Itm->addParent( $this );
+            $Itm->addParent($this);
             $result['items'][] = $Itm->toArray();
         }
 

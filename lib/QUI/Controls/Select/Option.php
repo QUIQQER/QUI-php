@@ -6,20 +6,23 @@
 
 namespace QUI\Controls\Select;
 
+use QUI;
+
 /**
  * Option
  * Erstellt ein Optionfeld in einem _ptools Select Objekt
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.select
  *
- * @todo we need that?
+ * @todo    we need that?
  */
 
-class Option extends \QUI\QDOM
+class Option extends QUI\QDOM
 {
     /**
      * Parent object
+     *
      * @var \QUI\Controls\Select\Select
      */
     private $_parent;
@@ -39,7 +42,7 @@ class Option extends \QUI\QDOM
      *
      * @param \QUI\Controls\Select\Select $parent
      */
-    public function addParent(\QUI\Controls\Select\Select $parent)
+    public function addParent(QUI\Controls\Select\Select $parent)
     {
         $this->_parent = $parent;
     }
@@ -56,12 +59,16 @@ class Option extends \QUI\QDOM
 
     /**
      * create the jsobject and the create
+     *
      * @return String
      */
     public function create()
     {
-        $jsString  = 'var '.$this->_settings['name'].' = '. $this->jsObject() .';';
-        $jsString .= $this->_parent->getName().'.appendChild( '.$this->_settings['name'].' );';
+        $jsString = 'var '.$this->_attributes['name'].' = '.$this->jsObject().';';
+        $jsString
+            .=
+            $this->_parent->getAttribute('name').'.appendChild( '.$this->_attributes['name']
+            .' );';
 
         return $jsString;
     }
@@ -73,27 +80,26 @@ class Option extends \QUI\QDOM
      */
     public function jsObject()
     {
-        $allattributes = $this->getAllAttributes();
+        $allattributes = $this->getAttributes();
 
-        $jsString  = 'new _ptools.Option({
-            name: "'. $this->getName() .'",';
+        $jsString
+            = 'new _ptools.Option({
+            name: "'.$this->getName().'",';
 
-        foreach ($allattributes as $key => $setting)
-        {
-            if($key != 'name' && $key != 'text') {
-                $jsString  .= $key.': '. json_encode($setting) .',';
+        foreach ($allattributes as $key => $setting) {
+            if ($key != 'name' && $key != 'text') {
+                $jsString .= $key.': '.json_encode($setting).',';
             }
         }
 
-        if($this->getAttribute('text'))
-        {
-            $jsString .= 'text: "'. $this->getAttribute('text') .'"';
-        } else
-        {
+        if ($this->getAttribute('text')) {
+            $jsString .= 'text: "'.$this->getAttribute('text').'"';
+        } else {
             $jsString .= 'text: ""';
         }
 
         $jsString .= '})';
+
         return $jsString;
     }
 }

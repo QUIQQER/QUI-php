@@ -6,26 +6,30 @@
 
 namespace QUI\Controls\Select;
 
+use QUI;
+
 /**
  * Select Element
  * Erstellt eine Selectbox
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.select
  *
- * @todo we need that?
+ * @todo    we need that?
  */
 
-class Select extends \QUI\QDOM
+class Select extends QUI\QDOM
 {
     /**
      * Parent Object
+     *
      * @var \QUI\Controls\Control
      */
     private $_parent;
 
     /**
      * Sub items
+     *
      * @var array
      */
     private $_items = array();
@@ -45,7 +49,7 @@ class Select extends \QUI\QDOM
      *
      * @param \QUI\Controls\Select\Option $option
      */
-    public function appendChild(\QUI\Controls\Select\Option $Option)
+    public function appendChild(QUI\Controls\Select\Option $Option)
     {
         $this->_items[] = $Option;
     }
@@ -78,56 +82,55 @@ class Select extends \QUI\QDOM
      */
     public function getChildren()
     {
-         return $this->_items;
+        return $this->_items;
     }
 
     /**
      * create the jsobject and the create
+     *
      * @return String
      */
     public function create()
     {
-        $jsString  = 'var '.$this->getAttribute('name') .' = '. $this->jsObject() .';';
-        $jsString .= $this->_parent->getName().'.appendChild( '.$this->getAttribute('name').' );';
+        $jsString
+            = 'var '.$this->getAttribute('name').' = '.$this->jsObject().';';
+        $jsString .= $this->_parent->getName().'.appendChild( '
+            .$this->getAttribute('name').' );';
 
         return $jsString;
     }
 
     /**
      * create only the jsobject
+     *
      * @return String
      */
     public function jsObject()
     {
-        $allattributes = $this->getAllAttributes();
+        $allattributes = $this->getAttributes();
 
         $jsString = 'new _ptools.Select({'.
-                        'name: "'.$this->getAttribute('name').'",';
+            'name: "'.$this->getAttribute('name').'",';
 
-        foreach ( $allattributes as $key => $setting )
-        {
-            if($key != 'name' && $key != 'text') {
-                $jsString  .= $key.': '. json_encode($setting) .',';
+        foreach ($allattributes as $key => $setting) {
+            if ($key != 'name' && $key != 'text') {
+                $jsString .= $key.': '.json_encode($setting).',';
             }
         }
 
-        if ( $this->getAttribute('text') )
-        {
+        if ($this->getAttribute('text')) {
             $jsString .= 'text: "'.$this->getAttribute('text').'"';
-        } else
-        {
+        } else {
             $jsString .= 'text: ""';
         }
 
         $jsString .= '})';
 
 
-        if ( count( $this->_items ) > 0 )
-        {
-            foreach ( $this->_items as $itm )
-            {
-                $itm->addParent( $this );
-                $jsString .= '.appendChild('. $itm->jsObject() .')';
+        if (count($this->_items) > 0) {
+            foreach ($this->_items as $itm) {
+                $itm->addParent($this);
+                $jsString .= '.appendChild('.$itm->jsObject().')';
             }
         }
 

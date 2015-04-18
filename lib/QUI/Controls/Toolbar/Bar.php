@@ -9,7 +9,7 @@ namespace QUI\Controls\Toolbar;
 /**
  * Toolbar Bar
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.toolbar
  */
 
@@ -17,12 +17,14 @@ class Bar
 {
     /**
      * all settings from the toolbar
+     *
      * @var array
      */
     private $_settings = array();
 
     /**
      * all subitems from the toolbar
+     *
      * @var array
      */
     private $_items = array();
@@ -46,11 +48,13 @@ class Bar
      *        \QUI\Controls\Toolbar\Tab|
      *        \QUI\Controls\Buttons\Button|
      *        \QUI\Controls\Buttons\Seperator $itm
+     *
      * @return \QUI\Controls\Toolbar\Bar this
      */
     public function appendChild($itm)
     {
         $this->_items[] = $itm;
+
         return $this;
     }
 
@@ -71,7 +75,7 @@ class Bar
      */
     public function clear()
     {
-        return $this->_settings['name'] .'.clear();';
+        return $this->_settings['name'].'.clear();';
     }
 
     /**
@@ -91,8 +95,9 @@ class Bar
      */
     public function create()
     {
-        $jsString  = 'var '. $this->_settings['name'] .' = '. $this->jsObject();
-        $jsString .= 'document.getElementById("'. $this->_settings['parent'] .'").appendChild('. $this->_settings['name'] .'.create());';
+        $jsString = 'var '.$this->_settings['name'].' = '.$this->jsObject();
+        $jsString .= 'document.getElementById("'.$this->_settings['parent']
+            .'").appendChild('.$this->_settings['name'].'.create());';
 
         return $jsString;
     }
@@ -106,20 +111,18 @@ class Bar
     {
         $jsString = 'new QUI.controls.toolbar.Bar({';
 
-        foreach ( $this->_settings as $s => $value )
-        {
-            if ( $s != 'name' ) {
-                $jsString .= $s .' : "'. $value .'",';
+        foreach ($this->_settings as $s => $value) {
+            if ($s != 'name') {
+                $jsString .= $s.' : "'.$value.'",';
             }
         }
 
-        $jsString .= 'name : "'. $this->_settings['name'] .'"';
+        $jsString .= 'name : "'.$this->_settings['name'].'"';
         $jsString .= '});'."\n";
 
-        foreach ( $this->_items as $itm )
-        {
-            $itm->addParent( $this );
-            $jsString .= $itm->create() ."\n";
+        foreach ($this->_items as $itm) {
+            $itm->addParent($this);
+            $jsString .= $itm->create()."\n";
         }
 
         return $jsString;
@@ -129,14 +132,13 @@ class Bar
      * Sucht ein Item in der Toolbar nach dem Namen und gibt dieses zurück
      *
      * @param String $name
+     *
      * @return Bool|\QUI\Controls\Sitemap\Item|\QUI\Controls\Toolbar\Tab|\QUI\Controls\Buttons\Button|\QUI\Controls\Buttons\Seperator
      */
     public function getElementByName($name)
     {
-        foreach ( $this->_items as $itm )
-        {
-            if ( $itm->getName() == $name )
-            {
+        foreach ($this->_items as $itm) {
+            if ($itm->getName() == $name) {
                 return $itm;
                 break;
             }
@@ -152,10 +154,9 @@ class Bar
      */
     public function removeChild($Child)
     {
-        foreach ( $this->_items as $key => $Itm )
-        {
-            if ( $Itm == $Child ) {
-                unset( $this->_items[ $key ] );
+        foreach ($this->_items as $key => $Itm) {
+            if ($Itm == $Child) {
+                unset($this->_items[$key]);
             }
         }
     }
@@ -167,7 +168,7 @@ class Bar
      */
     public function firstChild()
     {
-        if ( !isset($this->_items[0]) ) {
+        if (!isset($this->_items[0])) {
             return false;
         }
 
@@ -194,9 +195,8 @@ class Bar
     {
         $jsString = '';
 
-        foreach ( $this->_items as $itm )
-        {
-            $itm->addParent( $this );
+        foreach ($this->_items as $itm) {
+            $itm->addParent($this);
             $jsString .= $itm->create();
         }
 
@@ -212,7 +212,7 @@ class Bar
     {
         $result = array();
 
-        foreach ( $this->_items as $Itm ) {
+        foreach ($this->_items as $Itm) {
             $result[] = $Itm->getAllAttributes();
         }
 

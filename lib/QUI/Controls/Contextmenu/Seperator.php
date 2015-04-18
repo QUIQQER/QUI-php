@@ -11,14 +11,14 @@ use QUI;
 /**
  * \QUI\Controls\Contextmenu\Seperator
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.contextmenu
  */
-
 class Seperator extends QUI\QDOM
 {
     /**
      * The Parent Object
+     *
      * @var \QUI\Controls\Control
      */
     private $_parent = null;
@@ -32,29 +32,32 @@ class Seperator extends QUI\QDOM
      */
     public function __construct(array $settings)
     {
-        $this->setAttributes( $settings );
-        $this->setAttribute( 'type', 'qui/controls/contextmenu/Seperator' );
+        $this->setAttributes($settings);
+        $this->setAttribute('type', 'qui/controls/contextmenu/Seperator');
     }
 
     /**
      * Parent setzen
      *
      * @param \QUI\Controls\Buttons\Button|\QUI\Controls\Contextmenu\Baritem|\QUI\Controls\Contextmenu\Menuitem $parent
+     *
      * @return Bool
      * @throws QUI\Exception
      */
     public function addParent($parent)
     {
-        if ( get_class( $parent ) == 'QUI\\Controls\\Buttons\\Button' ||
-             get_class( $parent ) == 'QUI\\Controls\\Contextmenu\\Baritem' ||
-             get_class( $parent ) == 'QUI\\Controls\\Contextmenu\\Menuitem' )
-        {
+        if (get_class($parent) == 'QUI\\Controls\\Buttons\\Button'
+            || get_class($parent) == 'QUI\\Controls\\Contextmenu\\Baritem'
+            || get_class($parent) == 'QUI\\Controls\\Contextmenu\\Menuitem'
+        ) {
             $this->_parent = $parent;
+
             return true;
         }
 
         throw new QUI\Exception(
-            'Argument 1 passed to '. get_class( $this ) .'::addParent() must be an instance of Button or ContextBarItem '
+            'Argument 1 passed to '.get_class($this)
+            .'::addParent() must be an instance of Button or ContextBarItem '
         );
     }
 
@@ -75,10 +78,12 @@ class Seperator extends QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var '. $this->getAttribute('name') .' = new _ptools.ContextMenuSeperator({'.
-            'name: "'. $this->getAttribute('name') .'"';
+        $jsString = 'var '.$this->getAttribute('name')
+            .' = new _ptools.ContextMenuSeperator({'.
+            'name: "'.$this->getAttribute('name').'"';
         $jsString .= '});';
-        $jsString .= $this->_parent->getName() .'.appendChild('. $this->getAttribute('name') .');';
+        $jsString .= $this->_parent->getName().'.appendChild('
+            .$this->getAttribute('name').');';
 
         return $jsString;
     }

@@ -6,23 +6,27 @@
 
 namespace QUI\Controls\Toolbar;
 
+use QUI;
+
 /**
  * Toolbar Block
  *
- * @author www.pcsg.de (Henning Leutz)
+ * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.toolbar
  */
 
-class Block extends \QUI\QDOM
+class Block extends QUI\QDOM
 {
     /**
      * The parent object
+     *
      * @var \QUI\Controls\Control
      */
     private $_parent;
 
     /**
      * The sub items
+     *
      * @var array
      */
     private $_items;
@@ -34,8 +38,8 @@ class Block extends \QUI\QDOM
      */
     public function __construct(array $settings)
     {
-        foreach ( $settings as $key => $value ) {
-            $this->setAttribute( $key, $value );
+        foreach ($settings as $key => $value) {
+            $this->setAttribute($key, $value);
         }
     }
 
@@ -86,8 +90,9 @@ class Block extends \QUI\QDOM
      */
     public function create()
     {
-        $jsString  = 'var '. $this->getName() .' = ';
-        $jsString .= $this->_parent->getName().'.appendChild( '. $this->getName() .' );';
+        $jsString = 'var '.$this->getName().' = ';
+        $jsString .= $this->_parent->getName().'.appendChild( '.$this->getName()
+            .' );';
 
         return $jsString;
     }
@@ -103,22 +108,19 @@ class Block extends \QUI\QDOM
 
         $attributes = $this->getAllAttributes();
 
-        foreach ( $attributes as $s => $value )
-        {
-            if ( $s != 'name' ) {
-                $jsString .= $s .' : '. json_encode($value) .',';
+        foreach ($attributes as $s => $value) {
+            if ($s != 'name') {
+                $jsString .= $s.' : '.json_encode($value).',';
             }
         }
 
-        $jsString .= 'name: "'. $this->getName() .'"';
+        $jsString .= 'name: "'.$this->getName().'"';
         $jsString .= '})';
 
-        if ( count( $this->_items ) > 0)
-        {
-            foreach ( $this->_items as $itm )
-            {
-                $itm->addParent( $this );
-                $jsString .= '.appendChild('. $itm->jsObject() .')';
+        if (count($this->_items) > 0) {
+            foreach ($this->_items as $itm) {
+                $itm->addParent($this);
+                $jsString .= '.appendChild('.$itm->jsObject().')';
             }
         }
 
