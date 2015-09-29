@@ -59,6 +59,24 @@ class Window extends QUI\QDOM
     }
 
     /**
+     * Return the Categories
+     *
+     * @return array
+     */
+    public function getCategories()
+    {
+        return $this->_categories;
+    }
+
+    /**
+     * Remove all categories
+     */
+    public function clearCategories()
+    {
+        $this->_categories = array();
+    }
+
+    /**
      * Add a button
      *
      * @param \QUI\Controls\Buttons\Button $Btn
@@ -66,6 +84,16 @@ class Window extends QUI\QDOM
     public function appendButton(Button $Btn)
     {
         $this->_buttons[] = $Btn;
+    }
+
+    /**
+     * Return the Buttons
+     *
+     * @return array
+     */
+    public function getButtons()
+    {
+        return $this->_buttons;
     }
 
     /**
