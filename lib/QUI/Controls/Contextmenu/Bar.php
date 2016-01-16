@@ -37,7 +37,7 @@ class Bar extends QUI\QDOM
     /**
      * Ein ContextBarItem in die ContextBar hinzufügen
      *
-     * @param Baritem $Itm
+     * @param Baritem|MenuItem $Itm
      */
     public function appendChild(Baritem $Itm)
     {
@@ -98,7 +98,7 @@ class Bar extends QUI\QDOM
     /**
      * Alle Kinder bekommen
      *
-     * @return Array
+     * @return array
      */
     public function getChildren()
     {
@@ -108,7 +108,7 @@ class Bar extends QUI\QDOM
     /**
      * Menü als Array bekommen
      *
-     * @return Array
+     * @return array
      */
     public function toArray()
     {
