@@ -14,28 +14,28 @@ use QUI;
  * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.contextmenu
  */
-Class Menuitem extends QUI\QDOM
+class Menuitem extends QUI\QDOM
 {
     /**
      * subitems
      *
      * @var array
      */
-    private $_items = array();
+    private $items = array();
 
     /**
      * Parent Object
      *
      * @var \QUI\Controls\Contextmenu\Bar
      */
-    private $_parent = null;
+    private $Parent = null;
 
     /**
      * Disable status
      *
      * @var Bool
      */
-    private $_disabled = false;
+    private $disabled = false;
 
     /**
      * Constructor
@@ -65,7 +65,7 @@ Class Menuitem extends QUI\QDOM
             || get_class($parent) == 'QUI\\Controls\\Contextmenu\\Baritem'
             || get_class($parent) == 'QUI\\Controls\\Contextmenu\\Menuitem'
         ) {
-            $this->_parent = $parent;
+            $this->Parent = $parent;
 
             return true;
         }
@@ -74,7 +74,7 @@ Class Menuitem extends QUI\QDOM
             'Argument 1 passed to ContextMenuItem::addParent()
              must be an instance of QUI\\Controls\\Buttons\\Button or QUI\\Controls\\Contextmenu\\Bar '
             .
-            get_class($parent).' given'
+            get_class($parent) . ' given'
         );
     }
 
@@ -84,7 +84,7 @@ Class Menuitem extends QUI\QDOM
     public function sortChildren()
     {
         $_children = array();
-        $children = $this->_items;
+        $children  = $this->items;
 
         foreach ($children as $Itm) {
             $_children[$Itm->getAttribute('text')] = $Itm;
@@ -92,7 +92,7 @@ Class Menuitem extends QUI\QDOM
 
         ksort($_children);
 
-        $this->_items = $_children;
+        $this->items = $_children;
     }
 
     /**
@@ -107,7 +107,7 @@ Class Menuitem extends QUI\QDOM
         if (get_class($child) == 'QUI\\Controls\\Contextmenu\\Menuitem'
             || get_class($child) == 'QUI\\Controls\\Contextmenu\\Seperator'
         ) {
-            $this->_items[] = $child;
+            $this->items[] = $child;
         }
 
         return $this;
@@ -116,11 +116,11 @@ Class Menuitem extends QUI\QDOM
     /**
      * Kinder bekommen
      *
-     * @return Array
+     * @return array
      */
     public function getChildren()
     {
-        return $this->_items;
+        return $this->items;
     }
 
     /**
@@ -132,7 +132,7 @@ Class Menuitem extends QUI\QDOM
      */
     public function getElementByName($name)
     {
-        foreach ($this->_items as $Item) {
+        foreach ($this->items as $Item) {
             if ($name == $Item->getName()) {
                 return $Item;
             }
@@ -156,7 +156,7 @@ Class Menuitem extends QUI\QDOM
      */
     public function setDisable()
     {
-        $this->_disabled = true;
+        $this->disabled = true;
     }
 
     /**
@@ -164,7 +164,7 @@ Class Menuitem extends QUI\QDOM
      */
     public function isDisable()
     {
-        if ($this->_disabled) {
+        if ($this->disabled) {
             return true;
         }
 
@@ -176,7 +176,7 @@ Class Menuitem extends QUI\QDOM
      */
     public function setEnable()
     {
-        $this->_disabled = false;
+        $this->disabled = false;
     }
 
     /**
@@ -184,7 +184,7 @@ Class Menuitem extends QUI\QDOM
      */
     public function isEnable()
     {
-        if ($this->_disabled) {
+        if ($this->disabled) {
             return false;
         }
 
@@ -194,11 +194,11 @@ Class Menuitem extends QUI\QDOM
     /**
      * Item als Array bekommen
      *
-     * @return Array
+     * @return array
      */
     public function toArray()
     {
-        $result = $this->getAttributes();
+        $result          = $this->getAttributes();
         $result['items'] = array();
 
         /*
@@ -215,7 +215,7 @@ Class Menuitem extends QUI\QDOM
         }
         */
 
-        foreach ($this->_items as $Itm) {
+        foreach ($this->items as $Itm) {
             $Itm->addParent($this);
             $result['items'][] = $Itm->toArray();
         }

@@ -21,21 +21,21 @@ class Button extends QUI\QDOM
      *
      * @var object
      */
-    private $_parent;
+    private $Parent;
 
     /**
      * Sub Items
      *
      * @var array
      */
-    private $_items = array();
+    private $items = array();
 
     /**
      * Disable status
      *
-     * @var Bool
+     * @var boolean
      */
-    private $_disabled = false;
+    private $disabled = false;
 
     /**
      * constructor
@@ -55,13 +55,13 @@ class Button extends QUI\QDOM
      */
     public function addParent($Parent)
     {
-        $this->_parent = $Parent;
+        $this->Parent = $Parent;
     }
 
     /**
      * Get the name attribute
      *
-     * @return String
+     * @return string
      */
     public function getName()
     {
@@ -73,7 +73,7 @@ class Button extends QUI\QDOM
      */
     public function setDisable()
     {
-        $this->_disabled = true;
+        $this->disabled = true;
     }
 
     /**
@@ -83,20 +83,20 @@ class Button extends QUI\QDOM
      */
     public function appendChild(QUI\Controls\Contextmenu\Menuitem $mitem)
     {
-        $this->_items[] = $mitem;
+        $this->items[] = $mitem;
     }
 
     /**
      * Return the window as an array
      *
-     * @return Array
+     * @return array
      */
     public function toArray()
     {
-        $result = $this->getAttributes();
+        $result          = $this->getAttributes();
         $result['items'] = array();
 
-        foreach ($this->_items as $Itm) {
+        foreach ($this->items as $Itm) {
             /* @var $Itm QUI\Controls\Contextmenu\Menuitem */
             $Itm->addParent($this);
             $result['items'][] = $Itm->toArray();

@@ -21,7 +21,7 @@ class Bar extends QUI\QDOM
      *
      * @var array
      */
-    private $_items = array();
+    private $items = array();
 
     /**
      * Konstruktor
@@ -41,7 +41,7 @@ class Bar extends QUI\QDOM
      */
     public function appendChild(Baritem $Itm)
     {
-        $this->_items[] = $Itm;
+        $this->items[] = $Itm;
     }
 
     /**
@@ -63,7 +63,7 @@ class Bar extends QUI\QDOM
      */
     public function getElementByName($name)
     {
-        foreach ($this->_items as $Item) {
+        foreach ($this->items as $Item) {
             if ($name == $Item->getName()) {
                 return $Item;
             }
@@ -81,7 +81,7 @@ class Bar extends QUI\QDOM
      */
     public function getElementByPath($path)
     {
-        $path = explode('/', $path);
+        $path   = explode('/', $path);
         $Parent = $this;
 
         foreach ($path as $parent) {
@@ -98,23 +98,23 @@ class Bar extends QUI\QDOM
     /**
      * Alle Kinder bekommen
      *
-     * @return Array
+     * @return array
      */
     public function getChildren()
     {
-        return $this->_items;
+        return $this->items;
     }
 
     /**
      * Menü als Array bekommen
      *
-     * @return Array
+     * @return array
      */
     public function toArray()
     {
         $result = array();
 
-        foreach ($this->_items as $Itm) {
+        foreach ($this->items as $Itm) {
             $Itm->addParent($this);
             $result[] = $Itm->toArray();
         }
