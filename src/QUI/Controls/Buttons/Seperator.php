@@ -14,7 +14,6 @@ use QUI;
  * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.buttons
  */
-
 class Seperator extends QUI\QDOM
 {
     /**
@@ -22,7 +21,7 @@ class Seperator extends QUI\QDOM
      *
      * @var \QUI\Controls\Toolbar\Bar
      */
-    private $_parent;
+    private $Parent;
 
     /**
      * Constructor
@@ -42,7 +41,7 @@ class Seperator extends QUI\QDOM
      */
     public function addParent($Parent)
     {
-        $this->_parent = $Parent;
+        $this->Parent = $Parent;
     }
 
     /**
@@ -62,12 +61,10 @@ class Seperator extends QUI\QDOM
      */
     public function create()
     {
-        $jsString
-            = 'var '.$this->getAttribute('name').' = '.$this->jsObject().';';
-        $jsString .= $this->_parent->getName().'.appendChild( '
-            .$this->getAttribute('name').' );';
-
-        return $jsString;
+        return 'var ' . $this->getAttribute('name') . ' = '
+               . $this->jsObject() . ';'
+               . $this->Parent->getName() . '.appendChild( '
+               . $this->getAttribute('name') . ' );';
     }
 
     /**
@@ -80,10 +77,10 @@ class Seperator extends QUI\QDOM
         $jsString = 'new QUI.controls.buttons.Seperator({';
 
         if ($this->getAttribute('height')) {
-            $jsString .= 'height: "'.$this->getAttribute('height').'",';
+            $jsString .= 'height: "' . $this->getAttribute('height') . '",';
         }
 
-        $jsString .= 'name: "'.$this->getAttribute('name').'"';
+        $jsString .= 'name: "' . $this->getAttribute('name') . '"';
         $jsString .= '})';
 
         return $jsString;

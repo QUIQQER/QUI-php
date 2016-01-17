@@ -21,7 +21,7 @@ class Seperator extends QUI\QDOM
      *
      * @var \QUI\Controls\Control
      */
-    private $_parent = null;
+    private $Parent = null;
 
     /**
      * Constructor
@@ -50,14 +50,14 @@ class Seperator extends QUI\QDOM
             || get_class($parent) == 'QUI\\Controls\\Contextmenu\\Baritem'
             || get_class($parent) == 'QUI\\Controls\\Contextmenu\\Menuitem'
         ) {
-            $this->_parent = $parent;
+            $this->Parent = $parent;
 
             return true;
         }
 
         throw new QUI\Exception(
-            'Argument 1 passed to '.get_class($this)
-            .'::addParent() must be an instance of Button or ContextBarItem '
+            'Argument 1 passed to ' . get_class($this)
+            . '::addParent() must be an instance of Button or ContextBarItem '
         );
     }
 
@@ -78,12 +78,12 @@ class Seperator extends QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var '.$this->getAttribute('name')
-            .' = new _ptools.ContextMenuSeperator({'.
-            'name: "'.$this->getAttribute('name').'"';
-        $jsString .= '});';
-        $jsString .= $this->_parent->getName().'.appendChild('
-            .$this->getAttribute('name').');';
+        $jsString = 'var ' . $this->getAttribute('name')
+                    . ' = new _ptools.ContextMenuSeperator({'
+                    . 'name: "' . $this->getAttribute('name') . '"'
+                    . '});'
+                    . $this->Parent->getName() . '.appendChild('
+                    . $this->getAttribute('name') . ');';
 
         return $jsString;
     }
@@ -101,7 +101,7 @@ class Seperator extends QUI\QDOM
     /**
      * Enter description here...
      *
-     * @return Array
+     * @return array
      */
     public function toArray()
     {

@@ -14,28 +14,28 @@ use QUI;
  * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.contextmenu
  */
-Class Baritem extends QUI\QDOM
+class Baritem extends QUI\QDOM
 {
     /**
      * subitems
      *
      * @var array
      */
-    private $_items = array();
+    private $items = array();
 
     /**
      * Parent Object
      *
      * @var \QUI\Controls\Control
      */
-    private $_parent = null;
+    private $Parent = null;
 
     /**
      * Disable status
      *
      * @var Bool
      */
-    private $_disabled = false;
+    private $disabled = false;
 
     /**
      * Constructor
@@ -55,9 +55,9 @@ Class Baritem extends QUI\QDOM
      *
      * @param \QUI\Controls\Contextmenu\Bar $parent
      */
-    public function addParent(\QUI\Controls\Contextmenu\Bar $parent)
+    public function addParent(Bar $parent)
     {
-        $this->_parent = $parent;
+        $this->Parent = $parent;
     }
 
     /**
@@ -79,7 +79,7 @@ Class Baritem extends QUI\QDOM
      */
     public function appendChild($itm)
     {
-        $this->_items[] = $itm;
+        $this->items[] = $itm;
 
         return $this;
     }
@@ -89,7 +89,7 @@ Class Baritem extends QUI\QDOM
      */
     public function setDisable()
     {
-        $this->_disabled = true;
+        $this->disabled = true;
     }
 
     /**
@@ -97,7 +97,7 @@ Class Baritem extends QUI\QDOM
      */
     public function setEnable()
     {
-        $this->_disabled = false;
+        $this->disabled = false;
     }
 
     /**
@@ -109,7 +109,7 @@ Class Baritem extends QUI\QDOM
      */
     public function getElementByName($name)
     {
-        foreach ($this->_items as $itm) {
+        foreach ($this->items as $itm) {
             if ($name == $itm->getName()) {
                 return $itm;
             }
@@ -121,14 +121,14 @@ Class Baritem extends QUI\QDOM
     /**
      * Item als Array bekommen
      *
-     * @return Array
+     * @return array
      */
     public function toArray()
     {
-        $result = $this->getAllAttributes();
+        $result          = $this->getAttributes();
         $result['items'] = array();
 
-        foreach ($this->_items as $Itm) {
+        foreach ($this->items as $Itm) {
             $Itm->addParent($this);
             $result['items'][] = $Itm->toArray();
         }
