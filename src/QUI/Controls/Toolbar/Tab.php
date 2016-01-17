@@ -22,7 +22,7 @@ class Tab extends QUI\QDOM
      *
      * @var \QUI\Controls\Control
      */
-    private $_parent;
+    private $Parent;
 
     /**
      * Constructor
@@ -41,7 +41,7 @@ class Tab extends QUI\QDOM
      */
     public function addParent(QUI\Controls\Toolbar\Bar $Parent)
     {
-        $this->_parent = $Parent;
+        $this->Parent = $Parent;
     }
 
     /**
@@ -72,7 +72,7 @@ class Tab extends QUI\QDOM
     public function create()
     {
         $jsString = 'var '.$this->getName().' = '.$this->jsObject();
-        $jsString .= $this->_parent->getName().'.appendChild( '.$this->getName()
+        $jsString .= $this->Parent->getName().'.appendChild( '.$this->getName()
             .' );';
 
         return $jsString;

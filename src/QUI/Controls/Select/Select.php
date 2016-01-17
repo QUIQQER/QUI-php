@@ -17,7 +17,6 @@ use QUI;
  *
  * @todo    we need that?
  */
-
 class Select extends QUI\QDOM
 {
     /**
@@ -25,14 +24,14 @@ class Select extends QUI\QDOM
      *
      * @var \QUI\Controls\Control
      */
-    private $_parent;
+    private $Parent;
 
     /**
      * Sub items
      *
      * @var array
      */
-    private $_items = array();
+    private $items = array();
 
     /**
      * constructor
@@ -47,11 +46,11 @@ class Select extends QUI\QDOM
     /**
      * Ein Optionfield hinzufügen
      *
-     * @param \QUI\Controls\Select\Option $option
+     * @param \QUI\Controls\Select\Option $Option
      */
-    public function appendChild(QUI\Controls\Select\Option $Option)
+    public function appendChild(Option $Option)
     {
-        $this->_items[] = $Option;
+        $this->items[] = $Option;
     }
 
     /**
@@ -61,14 +60,13 @@ class Select extends QUI\QDOM
      */
     public function addParent($parent)
     {
-        $this->_parent = $parent;
+        $this->Parent = $parent;
     }
 
     /**
      * Namen vom Objekt bekommen
      *
      * @return String
-     * @deprecated Es sollte getAttribute('name') verwendet werden
      */
     public function getName()
     {
@@ -78,11 +76,11 @@ class Select extends QUI\QDOM
     /**
      * Enter description here...
      *
-     * @return Array
+     * @return array
      */
     public function getChildren()
     {
-        return $this->_items;
+        return $this->items;
     }
 
     /**
@@ -93,9 +91,9 @@ class Select extends QUI\QDOM
     public function create()
     {
         $jsString
-            = 'var '.$this->getAttribute('name').' = '.$this->jsObject().';';
-        $jsString .= $this->_parent->getName().'.appendChild( '
-            .$this->getAttribute('name').' );';
+            = 'var ' . $this->getName() . ' = ' . $this->jsObject() . ';';
+        $jsString .= $this->Parent->getName() . '.appendChild( '
+                     . $this->getAttribute('name') . ' );';
 
         return $jsString;
     }
@@ -109,17 +107,17 @@ class Select extends QUI\QDOM
     {
         $allattributes = $this->getAttributes();
 
-        $jsString = 'new _ptools.Select({'.
-            'name: "'.$this->getAttribute('name').'",';
+        $jsString = 'new _ptools.Select({' .
+                    'name: "' . $this->getAttribute('name') . '",';
 
         foreach ($allattributes as $key => $setting) {
             if ($key != 'name' && $key != 'text') {
-                $jsString .= $key.': '.json_encode($setting).',';
+                $jsString .= $key . ': ' . json_encode($setting) . ',';
             }
         }
 
         if ($this->getAttribute('text')) {
-            $jsString .= 'text: "'.$this->getAttribute('text').'"';
+            $jsString .= 'text: "' . $this->getAttribute('text') . '"';
         } else {
             $jsString .= 'text: ""';
         }
@@ -127,10 +125,10 @@ class Select extends QUI\QDOM
         $jsString .= '})';
 
 
-        if (count($this->_items) > 0) {
-            foreach ($this->_items as $itm) {
+        if (count($this->items) > 0) {
+            foreach ($this->items as $itm) {
                 $itm->addParent($this);
-                $jsString .= '.appendChild('.$itm->jsObject().')';
+                $jsString .= '.appendChild(' . $itm->jsObject() . ')';
             }
         }
 

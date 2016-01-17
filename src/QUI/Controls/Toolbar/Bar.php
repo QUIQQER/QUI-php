@@ -20,14 +20,14 @@ class Bar
      *
      * @var array
      */
-    private $_settings = array();
+    private $settings = array();
 
     /**
      * all subitems from the toolbar
      *
      * @var array
      */
-    private $_items = array();
+    private $items = array();
 
     /**
      * constructor
@@ -38,7 +38,7 @@ class Bar
      */
     public function __construct(array $settings)
     {
-        $this->_settings = $settings;
+        $this->settings = $settings;
     }
 
     /**
@@ -53,7 +53,7 @@ class Bar
      */
     public function appendChild($itm)
     {
-        $this->_items[] = $itm;
+        $this->items[] = $itm;
 
         return $this;
     }
@@ -61,21 +61,21 @@ class Bar
     /**
      * Namen vom Objekt bekommen
      *
-     * @return String
+     * @return string
      */
     public function getName()
     {
-        return $this->_settings['name'];
+        return $this->settings['name'];
     }
 
     /**
      * JavaScript Clear
      *
-     * @return String
+     * @return string
      */
     public function clear()
     {
-        return $this->_settings['name'].'.clear();';
+        return $this->settings['name'] . '.clear();';
     }
 
     /**
@@ -85,7 +85,7 @@ class Bar
      */
     public function getItems()
     {
-        return $this->_items;
+        return $this->items;
     }
 
     /**
@@ -95,9 +95,9 @@ class Bar
      */
     public function create()
     {
-        $jsString = 'var '.$this->_settings['name'].' = '.$this->jsObject();
-        $jsString .= 'document.getElementById("'.$this->_settings['parent']
-            .'").appendChild('.$this->_settings['name'].'.create());';
+        $jsString = 'var ' . $this->settings['name'] . ' = ' . $this->jsObject();
+        $jsString .= 'document.getElementById("' . $this->settings['parent']
+                     . '").appendChild(' . $this->settings['name'] . '.create());';
 
         return $jsString;
     }
@@ -105,24 +105,24 @@ class Bar
     /**
      * Gibt den JavaScript Code des Tabs zurück
      *
-     * @return String
+     * @return string
      */
     public function jsObject()
     {
         $jsString = 'new QUI.controls.toolbar.Bar({';
 
-        foreach ($this->_settings as $s => $value) {
+        foreach ($this->settings as $s => $value) {
             if ($s != 'name') {
-                $jsString .= $s.' : "'.$value.'",';
+                $jsString .= $s . ' : "' . $value . '",';
             }
         }
 
-        $jsString .= 'name : "'.$this->_settings['name'].'"';
-        $jsString .= '});'."\n";
+        $jsString .= 'name : "' . $this->settings['name'] . '"';
+        $jsString .= '});' . "\n";
 
-        foreach ($this->_items as $itm) {
+        foreach ($this->items as $itm) {
             $itm->addParent($this);
-            $jsString .= $itm->create()."\n";
+            $jsString .= $itm->create() . "\n";
         }
 
         return $jsString;
@@ -131,13 +131,17 @@ class Bar
     /**
      * Sucht ein Item in der Toolbar nach dem Namen und gibt dieses zurück
      *
-     * @param String $name
+     * @param string $name
      *
-     * @return Bool|\QUI\Controls\Sitemap\Item|\QUI\Controls\Toolbar\Tab|\QUI\Controls\Buttons\Button|\QUI\Controls\Buttons\Seperator
+     * @return Bool|
+     * \QUI\Controls\Sitemap\Item|
+     * \QUI\Controls\Toolbar\Tab|
+     * \QUI\Controls\Buttons\Button|
+     * \QUI\Controls\Buttons\Seperator
      */
     public function getElementByName($name)
     {
-        foreach ($this->_items as $itm) {
+        foreach ($this->items as $itm) {
             if ($itm->getName() == $name) {
                 return $itm;
                 break;
@@ -154,9 +158,9 @@ class Bar
      */
     public function removeChild($Child)
     {
-        foreach ($this->_items as $key => $Itm) {
+        foreach ($this->items as $key => $Itm) {
             if ($Itm == $Child) {
-                unset($this->_items[$key]);
+                unset($this->items[$key]);
             }
         }
     }
@@ -168,34 +172,34 @@ class Bar
      */
     public function firstChild()
     {
-        if (!isset($this->_items[0])) {
+        if (!isset($this->items[0])) {
             return false;
         }
 
-        return $this->_items[0];
+        return $this->items[0];
     }
 
     /**
      * Gibt alle Kinder zurück
      *
-     * @return Array
+     * @return array
      */
     public function getChildren()
     {
-        return $this->_items;
+        return $this->items;
     }
 
     /**
      * Nur die das JavaScript der Kinder bekommen
      * appendChild der Toolbar wird hier nicht ausgegeben
      *
-     * @return String
+     * @return string
      */
     public function createChildJs()
     {
         $jsString = '';
 
-        foreach ($this->_items as $itm) {
+        foreach ($this->items as $itm) {
             $itm->addParent($this);
             $jsString .= $itm->create();
         }
@@ -206,13 +210,13 @@ class Bar
     /**
      * Alle Kinder als Array bekommen
      *
-     * @return Array
+     * @return array
      */
     public function toArray()
     {
         $result = array();
 
-        foreach ($this->_items as $Itm) {
+        foreach ($this->items as $Itm) {
             $result[] = $Itm->getAllAttributes();
         }
 

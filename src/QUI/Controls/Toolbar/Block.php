@@ -14,7 +14,6 @@ use QUI;
  * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.toolbar
  */
-
 class Block extends QUI\QDOM
 {
     /**
@@ -22,14 +21,14 @@ class Block extends QUI\QDOM
      *
      * @var \QUI\Controls\Control
      */
-    private $_parent;
+    private $Parent;
 
     /**
      * The sub items
      *
      * @var array
      */
-    private $_items;
+    private $items;
 
     /**
      * Constructor
@@ -46,11 +45,11 @@ class Block extends QUI\QDOM
     /**
      * Parent setzen
      *
-     * @param Toolbar $parent
+     * @param Bar $Parent
      */
-    public function addParent(\QUI\Controls\Toolbar\Bar $parent)
+    public function addParent(Bar $Parent)
     {
-        $this->_parent = $parent;
+        $this->Parent = $Parent;
     }
 
     /**
@@ -70,7 +69,7 @@ class Block extends QUI\QDOM
      */
     public function onclick()
     {
-        return $this->getName().'.onclick();';
+        return $this->getName() . '.onclick();';
     }
 
     /**
@@ -80,7 +79,7 @@ class Block extends QUI\QDOM
      */
     public function appendChild($itm)
     {
-        $this->_items[] = $itm;
+        $this->items[] = $itm;
     }
 
     /**
@@ -90,9 +89,9 @@ class Block extends QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var '.$this->getName().' = ';
-        $jsString .= $this->_parent->getName().'.appendChild( '.$this->getName()
-            .' );';
+        $jsString = 'var ' . $this->getName() . ' = ';
+        $jsString .= $this->Parent->getName() . '.appendChild( ' . $this->getName()
+                     . ' );';
 
         return $jsString;
     }
@@ -106,21 +105,21 @@ class Block extends QUI\QDOM
     {
         $jsString = 'new _ptools.ToolbarBlock({';
 
-        $attributes = $this->getAllAttributes();
+        $attributes = $this->getAttributes();
 
         foreach ($attributes as $s => $value) {
             if ($s != 'name') {
-                $jsString .= $s.' : '.json_encode($value).',';
+                $jsString .= $s . ' : ' . json_encode($value) . ',';
             }
         }
 
-        $jsString .= 'name: "'.$this->getName().'"';
+        $jsString .= 'name: "' . $this->getName() . '"';
         $jsString .= '})';
 
-        if (count($this->_items) > 0) {
-            foreach ($this->_items as $itm) {
+        if (count($this->items) > 0) {
+            foreach ($this->items as $itm) {
                 $itm->addParent($this);
-                $jsString .= '.appendChild('.$itm->jsObject().')';
+                $jsString .= '.appendChild(' . $itm->jsObject() . ')';
             }
         }
 

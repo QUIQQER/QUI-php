@@ -17,7 +17,6 @@ use QUI;
  *
  * @todo    we need that?
  */
-
 class Option extends QUI\QDOM
 {
     /**
@@ -25,7 +24,7 @@ class Option extends QUI\QDOM
      *
      * @var \QUI\Controls\Select\Select
      */
-    private $_parent;
+    private $Parent;
 
     /**
      * constructor
@@ -44,7 +43,7 @@ class Option extends QUI\QDOM
      */
     public function addParent(QUI\Controls\Select\Select $parent)
     {
-        $this->_parent = $parent;
+        $this->Parent = $parent;
     }
 
     /**
@@ -64,11 +63,11 @@ class Option extends QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var '.$this->_attributes['name'].' = '.$this->jsObject().';';
+        $jsString = 'var ' . $this->getName() . ' = ' . $this->jsObject() . ';';
         $jsString
             .=
-            $this->_parent->getAttribute('name').'.appendChild( '.$this->_attributes['name']
-            .' );';
+            $this->Parent->getAttribute('name') . '.appendChild( ' . $this->getName()
+            . ' );';
 
         return $jsString;
     }
@@ -84,16 +83,16 @@ class Option extends QUI\QDOM
 
         $jsString
             = 'new _ptools.Option({
-            name: "'.$this->getName().'",';
+            name: "' . $this->getName() . '",';
 
         foreach ($allattributes as $key => $setting) {
             if ($key != 'name' && $key != 'text') {
-                $jsString .= $key.': '.json_encode($setting).',';
+                $jsString .= $key . ': ' . json_encode($setting) . ',';
             }
         }
 
         if ($this->getAttribute('text')) {
-            $jsString .= 'text: "'.$this->getAttribute('text').'"';
+            $jsString .= 'text: "' . $this->getAttribute('text') . '"';
         } else {
             $jsString .= 'text: ""';
         }

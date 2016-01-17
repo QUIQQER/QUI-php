@@ -22,21 +22,21 @@ class Window extends QUI\QDOM
      *
      * @var String
      */
-    protected $_TYPE = 'QUI\\Controls\\Windows\\Window';
+    protected $TYPE = 'QUI\\Controls\\Windows\\Window';
 
     /**
      * categories - \QUI\Controls\Buttons\Button
      *
      * @var array
      */
-    protected $_categories = array();
+    protected $categories = array();
 
     /**
      * buttons - \QUI\Controls\Buttons\Button
      *
      * @var array
      */
-    protected $_buttons = array();
+    protected $buttons = array();
 
     /**
      * constructor
@@ -55,7 +55,7 @@ class Window extends QUI\QDOM
      */
     public function appendCategory(Button $Btn)
     {
-        $this->_categories[] = $Btn;
+        $this->categories[] = $Btn;
     }
 
     /**
@@ -65,7 +65,7 @@ class Window extends QUI\QDOM
      */
     public function getCategories()
     {
-        return $this->_categories;
+        return $this->categories;
     }
 
     /**
@@ -73,7 +73,7 @@ class Window extends QUI\QDOM
      */
     public function clearCategories()
     {
-        $this->_categories = array();
+        $this->categories = array();
     }
 
     /**
@@ -83,7 +83,7 @@ class Window extends QUI\QDOM
      */
     public function appendButton(Button $Btn)
     {
-        $this->_buttons[] = $Btn;
+        $this->buttons[] = $Btn;
     }
 
     /**
@@ -93,27 +93,27 @@ class Window extends QUI\QDOM
      */
     public function getButtons()
     {
-        return $this->_buttons;
+        return $this->buttons;
     }
 
     /**
      * Return the window as an array
      *
-     * @return Array
+     * @return array
      */
     public function toArray()
     {
         $result = $this->getAttributes();
 
         $result['categories'] = array();
-        $result['buttons'] = array();
+        $result['buttons']    = array();
 
-        foreach ($this->_categories as $Itm) {
+        foreach ($this->categories as $Itm) {
             $Itm->addParent($this);
             $result['categories'][] = $Itm->toArray();
         }
 
-        foreach ($this->_buttons as $Itm) {
+        foreach ($this->buttons as $Itm) {
             $Itm->addParent($this);
             $result['buttons'][] = $Itm->toArray();
         }

@@ -21,7 +21,7 @@ class Map extends QUI\QDOM
      * Sub Items
      * @var array
      */
-    private $_items = array();
+    private $items = array();
 
     /**
      * Konstruktor
@@ -41,9 +41,9 @@ class Map extends QUI\QDOM
      *
      * @param \QUI\Controls\Sitemap\Item $itm
      */
-    public function appendChild(\QUI\Controls\Sitemap\Item $itm)
+    public function appendChild(Item $itm)
     {
-        $this->_items[] = $itm;
+        $this->items[] = $itm;
     }
 
     /**
@@ -64,15 +64,15 @@ class Map extends QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var '.$this->getAttribute('name').' = new _ptools.Sitemap();';
+        $jsString = 'var ' . $this->getAttribute('name') . ' = new _ptools.Sitemap();';
 
-        foreach ( $this->_items as $itm )
-        {
+        foreach ($this->items as $itm) {
             $itm->addParent($this);
             $jsString .= $itm->create();
         }
 
-        $jsString .= 'document.getElementById("'.$this->getAttribute('parent').'").appendChild('.$this->getAttribute('name').'.create());';
+        $jsString .= 'document.getElementById("' . $this->getAttribute('parent') . '")
+        .appendChild(' . $this->getAttribute('name') . '.create());';
         return $jsString;
     }
 }

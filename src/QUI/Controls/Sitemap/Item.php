@@ -15,7 +15,6 @@ use QUI;
  * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.sitemap
  */
-
 class Item extends QUI\QDOM
 {
     /**
@@ -23,14 +22,14 @@ class Item extends QUI\QDOM
      *
      * @var array
      */
-    private $_items = array();
+    private $items = array();
 
     /**
      * parent object
      *
      * @var \QUI\Controls\Control
      */
-    private $_parent = null;
+    private $Parent = null;
 
     /**
      * Konstruktor
@@ -50,9 +49,9 @@ class Item extends QUI\QDOM
      *
      * @param \QUI\Controls\Sitemap\Map $Parent
      */
-    public function addParent(\QUI\Controls\Sitemap\Map $Parent)
+    public function addParent(Map $Parent)
     {
-        $this->_parent = $Parent;
+        $this->Parent = $Parent;
     }
 
     /**
@@ -70,9 +69,9 @@ class Item extends QUI\QDOM
      *
      * @param \QUI\Controls\Sitemap\Item $itm
      */
-    public function appendChild(\QUI\Controls\Sitemap\Item $itm)
+    public function appendChild(Item $itm)
     {
-        $this->_items[] = $itm;
+        $this->items[] = $itm;
     }
 
     /**
@@ -84,18 +83,18 @@ class Item extends QUI\QDOM
      */
     public function create($append = true)
     {
-        $jsString = 'var '.$this->getName().'=';
-        $jsString .= $this->createJsObject().';';
+        $jsString = 'var ' . $this->getName() . '=';
+        $jsString .= $this->createJsObject() . ';';
 
-        foreach ($this->_items as $itm) {
+        foreach ($this->items as $itm) {
             $itm->addParent($this);
             $jsString .= $itm->create();
         }
 
         if ($append == true) {
             $jsString
-                .= $this->parent->getName().'.appendChild('.$this->getName()
-                .');';
+                .= $this->getParent()->getName() . '.appendChild(' . $this->getName()
+                   . ');';
         }
 
         return $jsString;
@@ -108,16 +107,16 @@ class Item extends QUI\QDOM
      */
     public function createJsObject()
     {
-        $allattributes = $this->getAllAttributes();
-        $jsString = 'new _ptools.SitemapItem({';
+        $allattributes = $this->getAttributes();
+        $jsString      = 'new _ptools.SitemapItem({';
 
         foreach ($allattributes as $key => $setting) {
             if ($key != 'name' && $key != 'text') {
-                $jsString .= $key.': '.json_encode($setting).',';
+                $jsString .= $key . ': ' . json_encode($setting) . ',';
             }
         }
 
-        $jsString .= 'text: '.json_encode($this->getAttribute('text'));
+        $jsString .= 'text: ' . json_encode($this->getAttribute('text'));
         $jsString .= '})';
 
         return $jsString;
