@@ -46,22 +46,32 @@ class EventHandler
                 throw new QUI\Exception('Control not found: ' . $params['control']);
             }
 
-            /* @var $Control \QUI\Control */
+            /* @var $Control QUI\Controls\Control */
             $Control = new $params['control']();
-
+            unset($params['control']);
         } catch (QUI\Exception $Exception) {
             QUI\System\Log::writeException($Exception);
             return '';
         }
 
+        if (isset($params['styles'])
+            && method_exists($Control, 'setStyles')
+        ) {
+            $Control->setStyles(
+                QUI\Utils\StringHelper::splitStyleAttributes($params['styles'])
+            );
+        }
+
 
         $assign = isset($params['assign']) ? $params['assign'] : false;
+
+        $Control->setAttributes($params);
+
 
         if (!$assign) {
             if (method_exists($Control, 'create')) {
                 try {
                     return $Control->create();
-
                 } catch (QUI\Exception $Exception) {
                     QUI\System\Log::writeException($Exception);
                 }

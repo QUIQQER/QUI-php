@@ -30,18 +30,58 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
     protected $cssFiles = array();
 
     /**
+     * css classes
+     *
+     * @var array
+     */
+    protected $cssClasses = array();
+
+    /**
+     * JavaScript QUI Require Module name
+     * @var string
+     */
+    protected $module = '';
+
+    /**
      * @var QUI\Events\Event
      */
     protected $Events;
 
     /**
      * Control constructor.
+     *
+     * @param array $params
      */
-    public function __construct()
+    public function __construct($params = array())
     {
         $this->Events = new QUI\Events\Event();
 
-        QUI\Controls\Handler::getInstance()->register($this);
+        if (isset($params['styles'])) {
+            $this->setStyles($params['styles']);
+            unset($params['styles']);
+        }
+
+        if (isset($params['class'])) {
+            $this->addCSSClass($params['class']);
+            unset($params['class']);
+        }
+
+        if (isset($params['events'])) {
+            $this->addEvents($params['events']);
+            unset($params['events']);
+        }
+
+        $this->setAttributes($params);
+    }
+
+    /**
+     * Set the javascript qui module class
+     *
+     * @param string $module
+     */
+    protected function setModule($module)
+    {
+        $this->module = $module;
     }
 
     /**
@@ -156,6 +196,105 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
     }
 
     /**
+     * Add a css class
+     *
+     * @param string $cssClass
+     */
+    public function addCSSClass($cssClass)
+    {
+        if (!is_string($cssClass)) {
+            return;
+        }
+
+        if (empty($cssClass)) {
+            return;
+        }
+
+        $classes = preg_replace('/[^_a-zA-Z0-9-]/', ' ', $cssClass);
+        $classes = explode(' ', $classes);
+
+        foreach ($classes as $cssClass) {
+            if (!isset($this->cssClasses[$cssClass])) {
+                $this->cssClasses[$cssClass] = true;
+            }
+        }
+    }
+
+    /**
+     * Return all css classes
+     *
+     * @return string
+     */
+    public function getCSSClasses()
+    {
+        return $this->cssClasses;
+    }
+
+    /**
+     * @param string|integer|float $val
+     *
+     * @return string
+     */
+    protected function parseCSSValue($val)
+    {
+        $val = trim($val);
+
+        if (empty($val)) {
+            return '';
+        }
+
+        if (is_numeric($val)) {
+            return (string)$val . 'px';
+        }
+
+        if (strpos($val, 'calc(') !== false) {
+            return (string)$val;
+        }
+
+        $units = array(
+            'px',
+            'cm',
+            'mm',
+            'mozmm',
+            'in',
+            'pt',
+            'pc',
+            'vh',
+            'vw',
+            'vm',
+            'vmin',
+            'vmax',
+            'rem',
+            '%',
+            'em',
+            'ex',
+            'ch',
+            'fr',
+            'deg',
+            'grad',
+            'rad',
+            's',
+            'ms',
+            'turns',
+            'Hz',
+            'kHz'
+        );
+
+        $no   = (int)$val;
+        $unit = str_replace($no, '', $val);
+
+        if (in_array($unit, $units)) {
+            return $no . $unit;
+        }
+
+        if (!empty($no) && empty($unit)) {
+            return $no . 'px';
+        }
+
+        return '';
+    }
+
+    /**
      * Render
      */
 
@@ -168,16 +307,24 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
     {
         $this->Events->fireEvent('create', array($this));
 
+        $render   = '';
         $cssFiles = $this->getCSSFiles();
+        $quiPath  = QUI\Controls\Handler::getInstance()->getConfig('QUI_PATH');
 
         if (!empty($cssFiles)) {
+            foreach ($cssFiles as $cssFile) {
+                $relative = str_replace($quiPath, '', $cssFile);
 
+                $render .= '<style data-file="' . $relative . '" data-qui-module="' . $this->module . '">';
+                $render .= file_get_contents($cssFile);
+                $render .= '</style>';
+            }
         }
 
         if (method_exists($this, 'onCreate')) {
-            return $this->onCreate();
+            $render .= $this->onCreate();
         }
 
-        return '';
+        return $render;
     }
 }

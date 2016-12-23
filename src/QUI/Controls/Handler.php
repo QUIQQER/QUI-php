@@ -41,9 +41,11 @@ class Handler
      */
     public function __construct($config = array())
     {
+        $packages = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
+
         // default config
         $this->config = array(
-            'QUI_PATH' => dirname(dirname(dirname(dirname(__FILE__)))) . '/qui/'
+            'QUI_PATH' => $packages . '/qui/'
         );
 
         $this->setConfig($config);
