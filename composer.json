@@ -2,7 +2,7 @@
   "name": "quiqqer/qui-php",
   "type": "library",
   "description": "QUI - PHP Controls",
-  "version": "dev-master",
+  "version": "0.10.0",
   "license": "GPL-3.0+",
   "authors": [
     {
