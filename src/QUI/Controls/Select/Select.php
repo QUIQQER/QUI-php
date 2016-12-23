@@ -90,10 +90,8 @@ class Select extends QUI\QDOM
      */
     public function create()
     {
-        $jsString
-            = 'var ' . $this->getName() . ' = ' . $this->jsObject() . ';';
-        $jsString .= $this->Parent->getName() . '.appendChild( '
-                     . $this->getAttribute('name') . ' );';
+        $jsString = 'var ' . $this->getName() . ' = ' . $this->jsObject() . ';';
+        $jsString .= $this->Parent->getName() . '.appendChild( ' . $this->getAttribute('name') . ' );';
 
         return $jsString;
     }

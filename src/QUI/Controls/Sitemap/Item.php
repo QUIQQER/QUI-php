@@ -92,9 +92,7 @@ class Item extends QUI\QDOM
         }
 
         if ($append == true) {
-            $jsString
-                .= $this->getParent()->getName() . '.appendChild(' . $this->getName()
-                   . ');';
+            $jsString .= $this->getParent()->getName() . '.appendChild(' . $this->getName() . ');';
         }
 
         return $jsString;
