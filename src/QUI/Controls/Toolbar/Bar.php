@@ -47,7 +47,7 @@ class Bar
      * @param \QUI\Controls\Sitemap\Item|
      *        \QUI\Controls\Toolbar\Tab|
      *        \QUI\Controls\Buttons\Button|
-     *        \QUI\Controls\Buttons\Seperator $itm
+     *        \QUI\Controls\Buttons\Separator $itm
      *
      * @return \QUI\Controls\Toolbar\Bar this
      */
@@ -137,7 +137,7 @@ class Bar
      * \QUI\Controls\Sitemap\Item|
      * \QUI\Controls\Toolbar\Tab|
      * \QUI\Controls\Buttons\Button|
-     * \QUI\Controls\Buttons\Seperator
+     * \QUI\Controls\Buttons\Separator
      */
     public function getElementByName($name)
     {
@@ -168,7 +168,7 @@ class Bar
     /**
      * Gibt das erste Kind zurück
      *
-     * @return object
+     * @return object|false
      */
     public function firstChild()
     {

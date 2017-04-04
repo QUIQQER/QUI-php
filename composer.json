@@ -18,7 +18,8 @@
   },
   "require": {
     "php": ">=5.3",
-    "quiqqer/utils": "*@dev"
+    "quiqqer/utils": "*@dev",
+    "quiqqer\/qui": ">=1.*|dev-master|dev-dev"
   },
   "autoload": {
     "psr-4": {
