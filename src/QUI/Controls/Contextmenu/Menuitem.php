@@ -98,14 +98,14 @@ class Menuitem extends QUI\QDOM
     /**
      * Ein Kind hinzufügen
      *
-     * @param \QUI\Controls\Contextmenu\Menuitem|\QUI\Controls\Contextmenu\Seperator $child
+     * @param \QUI\Controls\Contextmenu\Menuitem|\QUI\Controls\Contextmenu\Separator $child
      *
      * @return \QUI\Controls\Contextmenu\Menuitem (this)
      */
     public function appendChild($child)
     {
-        if (get_class($child) == 'QUI\\Controls\\Contextmenu\\Menuitem'
-            || get_class($child) == 'QUI\\Controls\\Contextmenu\\Seperator'
+        if (get_class($child) == Menuitem::class
+            || get_class($child) == Separator::class
         ) {
             $this->items[] = $child;
         }
