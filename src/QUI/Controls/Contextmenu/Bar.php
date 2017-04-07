@@ -59,7 +59,7 @@ class Bar extends QUI\QDOM
      *
      * @param String $name - Name des Menüeintrages
      *
-     * @return Bool | Baritem
+     * @return Bool|Baritem
      */
     public function getElementByName($name)
     {

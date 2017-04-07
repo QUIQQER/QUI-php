@@ -71,6 +71,14 @@ class Baritem extends QUI\QDOM
     }
 
     /**
+     * Remove all children
+     */
+    public function clear()
+    {
+        $this->items = array();
+    }
+
+    /**
      * Ein ContextMenuItem hinzufügen
      *
      * @param \QUI\Controls\Contextmenu\Menuitem $itm
