@@ -114,6 +114,24 @@ class Menuitem extends QUI\QDOM
     }
 
     /**
+     * Remove a child item
+     *
+     * @param string $name - Name of the child
+     */
+    public function removeChild($name)
+    {
+        $items = array();
+
+        foreach ($this->items as $Item) {
+            if ($name != $Item->getName()) {
+                $items[] = $Item;
+            }
+        }
+
+        $this->items = $items;
+    }
+
+    /**
      * Kinder bekommen
      *
      * @return array
