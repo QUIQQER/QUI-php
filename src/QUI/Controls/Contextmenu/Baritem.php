@@ -12,7 +12,6 @@ use QUI;
  * ContextBarItem
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.contextmenu
  */
 class Baritem extends QUI\QDOM
 {
@@ -90,6 +89,24 @@ class Baritem extends QUI\QDOM
         $this->items[] = $itm;
 
         return $this;
+    }
+
+    /**
+     * Remove a child item
+     *
+     * @param string $name - Name of the child
+     */
+    public function removeChild($name)
+    {
+        $items = array();
+
+        foreach ($this->items as $Item) {
+            if ($name != $Item->getName()) {
+                $items[] = $Item;
+            }
+        }
+
+        $this->items = $items;
     }
 
     /**
