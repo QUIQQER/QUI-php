@@ -22,7 +22,7 @@ class Item extends QUI\QDOM
      *
      * @var array
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * parent object
@@ -39,7 +39,7 @@ class Item extends QUI\QDOM
      *                        $settings['name'] = Name vom JavaScript Objekt
      *                        $settings['icon'] = Sitemap Icon
      */
-    public function __construct(array $settings)
+    public function __construct(array $settings = [])
     {
         $this->setAttributes($settings);
     }
@@ -83,8 +83,8 @@ class Item extends QUI\QDOM
      */
     public function create($append = true)
     {
-        $jsString = 'var ' . $this->getName() . '=';
-        $jsString .= $this->createJsObject() . ';';
+        $jsString = 'var '.$this->getName().'=';
+        $jsString .= $this->createJsObject().';';
 
         foreach ($this->items as $itm) {
             $itm->addParent($this);
@@ -92,7 +92,7 @@ class Item extends QUI\QDOM
         }
 
         if ($append == true) {
-            $jsString .= $this->getParent()->getName() . '.appendChild(' . $this->getName() . ');';
+            $jsString .= $this->getParent()->getName().'.appendChild('.$this->getName().');';
         }
 
         return $jsString;
@@ -105,18 +105,37 @@ class Item extends QUI\QDOM
      */
     public function createJsObject()
     {
-        $allattributes = $this->getAttributes();
-        $jsString      = 'new _ptools.SitemapItem({';
+        $attributes = $this->getAttributes();
+        $jsString   = 'new _ptools.SitemapItem({';
 
-        foreach ($allattributes as $key => $setting) {
+        foreach ($attributes as $key => $setting) {
             if ($key != 'name' && $key != 'text') {
-                $jsString .= $key . ': ' . json_encode($setting) . ',';
+                $jsString .= $key.': '.json_encode($setting).',';
             }
         }
 
-        $jsString .= 'text: ' . json_encode($this->getAttribute('text'));
+        $jsString .= 'text: '.json_encode($this->getAttribute('text'));
         $jsString .= '})';
 
         return $jsString;
+    }
+
+    /**
+     * Return the map as an array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $result   = $this->getAttributes();
+        $children = [];
+
+        foreach ($this->items as $Item) {
+            $children[] = $Item->toArray();
+        }
+
+        $result['items'] = $children;
+
+        return $result;
     }
 }

@@ -19,9 +19,10 @@ class Map extends QUI\QDOM
 {
     /**
      * Sub Items
-     * @var array
+     *
+     * @var Item[]
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * Konstruktor
@@ -31,7 +32,7 @@ class Map extends QUI\QDOM
      *  id = id des DivElements der ContextBar
      *  name = Objektname der Contextbar
      */
-    public function __construct(array $settings)
+    public function __construct(array $settings = [])
     {
         $this->setAttributes($settings);
     }
@@ -58,21 +59,58 @@ class Map extends QUI\QDOM
     }
 
     /**
+     * Return a children by its name
+     *
+     * @param $name
+     * @return null|Item
+     */
+    public function getChildrenByName($name)
+    {
+        foreach ($this->items as $Item) {
+            if ($name === $Item->getAttribute('name')) {
+                return $Item;
+            }
+        }
+
+        return null;
+    }
+
+    /**
      * Erstellt das JavaScript für eine Sitemap
      *
      * @return String
      */
     public function create()
     {
-        $jsString = 'var ' . $this->getAttribute('name') . ' = new _ptools.Sitemap();';
+        $jsString = 'var '.$this->getAttribute('name').' = new _ptools.Sitemap();';
 
         foreach ($this->items as $itm) {
             $itm->addParent($this);
             $jsString .= $itm->create();
         }
 
-        $jsString .= 'document.getElementById("' . $this->getAttribute('parent') . '")
-        .appendChild(' . $this->getAttribute('name') . '.create());';
+        $jsString .= 'document.getElementById("'.$this->getAttribute('parent').'")
+        .appendChild('.$this->getAttribute('name').'.create());';
+
         return $jsString;
+    }
+
+    /**
+     * Return the map as an array
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        $result   = $this->getAttributes();
+        $children = [];
+
+        foreach ($this->items as $Item) {
+            $children[] = $Item->toArray();
+        }
+
+        $result['items'] = $children;
+
+        return $result;
     }
 }
