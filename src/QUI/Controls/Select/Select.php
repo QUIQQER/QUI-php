@@ -31,7 +31,7 @@ class Select extends QUI\QDOM
      *
      * @var array
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * constructor
@@ -90,8 +90,8 @@ class Select extends QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var ' . $this->getName() . ' = ' . $this->jsObject() . ';';
-        $jsString .= $this->Parent->getName() . '.appendChild( ' . $this->getAttribute('name') . ' );';
+        $jsString = 'var '.$this->getName().' = '.$this->jsObject().';';
+        $jsString .= $this->Parent->getName().'.appendChild( '.$this->getAttribute('name').' );';
 
         return $jsString;
     }
@@ -103,19 +103,19 @@ class Select extends QUI\QDOM
      */
     public function jsObject()
     {
-        $allattributes = $this->getAttributes();
+        $attributes = $this->getAttributes();
 
-        $jsString = 'new _ptools.Select({' .
-                    'name: "' . $this->getAttribute('name') . '",';
+        $jsString = 'new _ptools.Select({'.
+                    'name: "'.$this->getAttribute('name').'",';
 
-        foreach ($allattributes as $key => $setting) {
+        foreach ($attributes as $key => $setting) {
             if ($key != 'name' && $key != 'text') {
-                $jsString .= $key . ': ' . json_encode($setting) . ',';
+                $jsString .= $key.': '.json_encode($setting).',';
             }
         }
 
         if ($this->getAttribute('text')) {
-            $jsString .= 'text: "' . $this->getAttribute('text') . '"';
+            $jsString .= 'text: "'.$this->getAttribute('text').'"';
         } else {
             $jsString .= 'text: ""';
         }
@@ -126,7 +126,7 @@ class Select extends QUI\QDOM
         if (count($this->items) > 0) {
             foreach ($this->items as $itm) {
                 $itm->addParent($this);
-                $jsString .= '.appendChild(' . $itm->jsObject() . ')';
+                $jsString .= '.appendChild('.$itm->jsObject().')';
             }
         }
 

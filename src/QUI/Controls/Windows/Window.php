@@ -29,21 +29,21 @@ class Window extends QUI\QDOM
      *
      * @var array
      */
-    protected $categories = array();
+    protected $categories = [];
 
     /**
      * buttons - \QUI\Controls\Buttons\Button
      *
      * @var array
      */
-    protected $buttons = array();
+    protected $buttons = [];
 
     /**
      * constructor
      *
      * @param array $settings
      */
-    public function __construct($settings = array())
+    public function __construct($settings = [])
     {
         $this->setAttributes($settings);
     }
@@ -73,7 +73,7 @@ class Window extends QUI\QDOM
      */
     public function clearCategories()
     {
-        $this->categories = array();
+        $this->categories = [];
     }
 
     /**
@@ -105,8 +105,8 @@ class Window extends QUI\QDOM
     {
         $result = $this->getAttributes();
 
-        $result['categories'] = array();
-        $result['buttons']    = array();
+        $result['categories'] = [];
+        $result['buttons']    = [];
 
         foreach ($this->categories as $Itm) {
             $Itm->addParent($this);

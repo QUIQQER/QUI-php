@@ -43,7 +43,7 @@ class EventHandler
 
         try {
             if (!class_exists($params['control'])) {
-                throw new QUI\Exception('Control not found: ' . $params['control']);
+                throw new QUI\Exception('Control not found: '.$params['control']);
             }
 
             /* @var $Control QUI\Controls\Control */
@@ -51,6 +51,7 @@ class EventHandler
             unset($params['control']);
         } catch (QUI\Exception $Exception) {
             QUI\System\Log::writeException($Exception);
+
             return '';
         }
 
@@ -81,6 +82,7 @@ class EventHandler
         }
 
         $Smarty->assign($assign, $Control);
+
         return '';
     }
 }

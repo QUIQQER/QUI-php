@@ -61,10 +61,10 @@ class Separator extends QUI\QDOM
      */
     public function create()
     {
-        return 'var ' . $this->getAttribute('name') . ' = '
-               . $this->jsObject() . ';'
-               . $this->Parent->getName() . '.appendChild( '
-               . $this->getAttribute('name') . ' );';
+        return 'var '.$this->getAttribute('name').' = '
+               .$this->jsObject().';'
+               .$this->Parent->getName().'.appendChild( '
+               .$this->getAttribute('name').' );';
     }
 
     /**
@@ -77,10 +77,10 @@ class Separator extends QUI\QDOM
         $jsString = 'new QUI.controls.buttons.Separator({';
 
         if ($this->getAttribute('height')) {
-            $jsString .= 'height: "' . $this->getAttribute('height') . '",';
+            $jsString .= 'height: "'.$this->getAttribute('height').'",';
         }
 
-        $jsString .= 'name: "' . $this->getAttribute('name') . '"';
+        $jsString .= 'name: "'.$this->getAttribute('name').'"';
         $jsString .= '})';
 
         return $jsString;

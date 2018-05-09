@@ -69,7 +69,7 @@ class Block extends QUI\QDOM
      */
     public function onclick()
     {
-        return $this->getName() . '.onclick();';
+        return $this->getName().'.onclick();';
     }
 
     /**
@@ -89,9 +89,9 @@ class Block extends QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var ' . $this->getName() . ' = ';
-        $jsString .= $this->Parent->getName() . '.appendChild( ' . $this->getName()
-                     . ' );';
+        $jsString = 'var '.$this->getName().' = ';
+        $jsString .= $this->Parent->getName().'.appendChild( '.$this->getName()
+                     .' );';
 
         return $jsString;
     }
@@ -109,17 +109,17 @@ class Block extends QUI\QDOM
 
         foreach ($attributes as $s => $value) {
             if ($s != 'name') {
-                $jsString .= $s . ' : ' . json_encode($value) . ',';
+                $jsString .= $s.' : '.json_encode($value).',';
             }
         }
 
-        $jsString .= 'name: "' . $this->getName() . '"';
+        $jsString .= 'name: "'.$this->getName().'"';
         $jsString .= '})';
 
         if (count($this->items) > 0) {
             foreach ($this->items as $itm) {
                 $itm->addParent($this);
-                $jsString .= '.appendChild(' . $itm->jsObject() . ')';
+                $jsString .= '.appendChild('.$itm->jsObject().')';
             }
         }
 

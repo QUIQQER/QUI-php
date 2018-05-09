@@ -21,7 +21,7 @@ class Menuitem extends QUI\QDOM
      *
      * @var array
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * Parent Object
@@ -45,7 +45,7 @@ class Menuitem extends QUI\QDOM
      * $settings['name'] = Name vom JavaScript Objekt
      * $settings['image'] = Menubild
      */
-    public function __construct($settings = array())
+    public function __construct($settings = [])
     {
         $this->setAttributes($settings);
         $this->setAttribute('type', 'qui/controls/contextmenu/Item');
@@ -74,7 +74,7 @@ class Menuitem extends QUI\QDOM
             'Argument 1 passed to ContextMenuItem::addParent()
              must be an instance of QUI\\Controls\\Buttons\\Button or QUI\\Controls\\Contextmenu\\Bar '
             .
-            get_class($parent) . ' given'
+            get_class($parent).' given'
         );
     }
 
@@ -83,7 +83,7 @@ class Menuitem extends QUI\QDOM
      */
     public function sortChildren()
     {
-        $_children = array();
+        $_children = [];
         $children  = $this->items;
 
         foreach ($children as $Itm) {
@@ -120,7 +120,7 @@ class Menuitem extends QUI\QDOM
      */
     public function removeChild($name)
     {
-        $items = array();
+        $items = [];
 
         foreach ($this->items as $Item) {
             if ($name != $Item->getName()) {
@@ -217,7 +217,7 @@ class Menuitem extends QUI\QDOM
     public function toArray()
     {
         $result          = $this->getAttributes();
-        $result['items'] = array();
+        $result['items'] = [];
 
         /*
         if ( $this->getAttribute( 'onClick' ) ) {

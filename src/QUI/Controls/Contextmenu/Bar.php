@@ -21,7 +21,7 @@ class Bar extends QUI\QDOM
      *
      * @var array
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * Konstruktor
@@ -112,7 +112,7 @@ class Bar extends QUI\QDOM
      */
     public function toArray()
     {
-        $result = array();
+        $result = [];
 
         foreach ($this->items as $Itm) {
             $Itm->addParent($this);

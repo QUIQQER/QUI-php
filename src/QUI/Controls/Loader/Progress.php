@@ -23,7 +23,7 @@ class Progress extends QUI\Controls\Control
         parent::__construct();
 
         $this->addCSSFile(
-            QUI\Controls\Handler::getInstance()->getConfig('QUI_PATH') . 'qui/controls/loader/Progress.css'
+            QUI\Controls\Handler::getInstance()->getConfig('QUI_PATH').'qui/controls/loader/Progress.css'
         );
 
         $this->addCSSClass('qui-progress');
@@ -48,10 +48,10 @@ class Progress extends QUI\Controls\Control
         $class = '';
 
         if (!empty($styles)) {
-            $parts = array();
+            $parts = [];
 
             foreach ($styles as $key => $value) {
-                $parts[] = htmlentities($key) . ':' . htmlentities($value);
+                $parts[] = htmlentities($key).':'.htmlentities($value);
             }
 
             $style = implode(';', $parts);
@@ -62,7 +62,7 @@ class Progress extends QUI\Controls\Control
             $class = implode(' ', $class);
         }
 
-        return '<div data-qui="' . $this->module . '" class="' . $class . '" style="' . $style . '">
+        return '<div data-qui="'.$this->module.'" class="'.$class.'" style="'.$style.'">
             <div class="qui-progress-bar" style="width: 100px"></div>
         </div>';
     }

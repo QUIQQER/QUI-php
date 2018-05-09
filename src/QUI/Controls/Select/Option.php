@@ -63,11 +63,11 @@ class Option extends QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var ' . $this->getName() . ' = ' . $this->jsObject() . ';';
+        $jsString = 'var '.$this->getName().' = '.$this->jsObject().';';
         $jsString
-            .=
-            $this->Parent->getAttribute('name') . '.appendChild( ' . $this->getName()
-            . ' );';
+                  .=
+            $this->Parent->getAttribute('name').'.appendChild( '.$this->getName()
+            .' );';
 
         return $jsString;
     }
@@ -79,20 +79,19 @@ class Option extends QUI\QDOM
      */
     public function jsObject()
     {
-        $allattributes = $this->getAttributes();
+        $attributes = $this->getAttributes();
 
-        $jsString
-            = 'new _ptools.Option({
-            name: "' . $this->getName() . '",';
+        $jsString = 'new _ptools.Option({
+            name: "'.$this->getName().'",';
 
-        foreach ($allattributes as $key => $setting) {
+        foreach ($attributes as $key => $setting) {
             if ($key != 'name' && $key != 'text') {
-                $jsString .= $key . ': ' . json_encode($setting) . ',';
+                $jsString .= $key.': '.json_encode($setting).',';
             }
         }
 
         if ($this->getAttribute('text')) {
-            $jsString .= 'text: "' . $this->getAttribute('text') . '"';
+            $jsString .= 'text: "'.$this->getAttribute('text').'"';
         } else {
             $jsString .= 'text: ""';
         }

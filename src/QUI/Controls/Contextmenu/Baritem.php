@@ -20,7 +20,7 @@ class Baritem extends QUI\QDOM
      *
      * @var array
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * Parent Object
@@ -74,7 +74,7 @@ class Baritem extends QUI\QDOM
      */
     public function clear()
     {
-        $this->items = array();
+        $this->items = [];
     }
 
     /**
@@ -98,7 +98,7 @@ class Baritem extends QUI\QDOM
      */
     public function removeChild($name)
     {
-        $items = array();
+        $items = [];
 
         foreach ($this->items as $Item) {
             if ($name != $Item->getName()) {
@@ -151,7 +151,7 @@ class Baritem extends QUI\QDOM
     public function toArray()
     {
         $result          = $this->getAttributes();
-        $result['items'] = array();
+        $result['items'] = [];
 
         foreach ($this->items as $Itm) {
             $Itm->addParent($this);
