@@ -25,28 +25,28 @@ class Handler
      *
      * @var array
      */
-    protected $config = array();
+    protected $config = [];
 
     /**
      * list of css files
      *
      * @var array
      */
-    protected $cssFiles = array();
+    protected $cssFiles = [];
 
     /**
      * Handler constructor.
      *
      * @param array $config - Configuration - QUI_PATH
      */
-    public function __construct($config = array())
+    public function __construct($config = [])
     {
         $packages = dirname(dirname(dirname(dirname(dirname(__FILE__)))));
 
         // default config
-        $this->config = array(
-            'QUI_PATH' => $packages . '/qui/'
-        );
+        $this->config = [
+            'QUI_PATH' => $packages.'/qui/'
+        ];
 
         $this->setConfig($config);
     }
@@ -71,7 +71,7 @@ class Handler
      * @param array|string $config
      * @param bool|mixed $value - optional
      */
-    public function setConfig($config = array(), $value = false)
+    public function setConfig($config = [], $value = false)
     {
         if (is_array($config)) {
             foreach ($config as $name => $value) {

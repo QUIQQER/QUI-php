@@ -56,8 +56,8 @@ class Separator extends QUI\QDOM
         }
 
         throw new QUI\Exception(
-            'Argument 1 passed to ' . get_class($this)
-            . '::addParent() must be an instance of Button or ContextBarItem '
+            'Argument 1 passed to '.get_class($this)
+            .'::addParent() must be an instance of Button or ContextBarItem '
         );
     }
 
@@ -78,12 +78,12 @@ class Separator extends QUI\QDOM
      */
     public function create()
     {
-        $jsString = 'var ' . $this->getAttribute('name')
-                    . ' = new _ptools.ContextMenuSeparator({'
-                    . 'name: "' . $this->getAttribute('name') . '"'
-                    . '});'
-                    . $this->Parent->getName() . '.appendChild('
-                    . $this->getAttribute('name') . ');';
+        $jsString = 'var '.$this->getAttribute('name')
+                    .' = new _ptools.ContextMenuSeparator({'
+                    .'name: "'.$this->getAttribute('name').'"'
+                    .'});'
+                    .$this->Parent->getName().'.appendChild('
+                    .$this->getAttribute('name').');';
 
         return $jsString;
     }

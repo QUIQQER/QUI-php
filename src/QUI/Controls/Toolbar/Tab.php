@@ -14,7 +14,6 @@ use QUI;
  * @author  www.pcsg.de (Henning Leutz)
  * @package com.pcsg.qui.controls.toolbar
  */
-
 class Tab extends QUI\QDOM
 {
     /**
@@ -73,7 +72,7 @@ class Tab extends QUI\QDOM
     {
         $jsString = 'var '.$this->getName().' = '.$this->jsObject();
         $jsString .= $this->Parent->getName().'.appendChild( '.$this->getName()
-            .' );';
+                     .' );';
 
         return $jsString;
     }
@@ -85,7 +84,7 @@ class Tab extends QUI\QDOM
      */
     public function jsObject()
     {
-        $jsString = 'new QUI.controls.toolbar.Tab({';
+        $jsString   = 'new QUI.controls.toolbar.Tab({';
         $attributes = $this->getAttributes();
 
         foreach ($attributes as $s => $value) {

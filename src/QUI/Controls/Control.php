@@ -20,21 +20,21 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
      *
      * @var array
      */
-    protected $styles = array();
+    protected $styles = [];
 
     /**
      * css file list
      *
      * @var array
      */
-    protected $cssFiles = array();
+    protected $cssFiles = [];
 
     /**
      * css classes
      *
      * @var array
      */
-    protected $cssClasses = array();
+    protected $cssClasses = [];
 
     /**
      * JavaScript QUI Require Module name
@@ -52,7 +52,7 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
      *
      * @param array $params
      */
-    public function __construct($params = array())
+    public function __construct($params = [])
     {
         $this->Events = new QUI\Events\Event();
 
@@ -178,7 +178,7 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
      *
      * @param array $styles
      */
-    public function setStyles($styles = array())
+    public function setStyles($styles = [])
     {
         foreach ($styles as $key => $value) {
             $this->setStyle($key, $value);
@@ -223,7 +223,7 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
     /**
      * Return all css classes
      *
-     * @return string
+     * @return array
      */
     public function getCSSClasses()
     {
@@ -244,14 +244,14 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
         }
 
         if (is_numeric($val)) {
-            return (string)$val . 'px';
+            return (string)$val.'px';
         }
 
         if (strpos($val, 'calc(') !== false) {
             return (string)$val;
         }
 
-        $units = array(
+        $units = [
             'px',
             'cm',
             'mm',
@@ -278,17 +278,17 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
             'turns',
             'Hz',
             'kHz'
-        );
+        ];
 
         $no   = (int)$val;
         $unit = str_replace($no, '', $val);
 
         if (in_array($unit, $units)) {
-            return $no . $unit;
+            return $no.$unit;
         }
 
         if (!empty($no) && empty($unit)) {
-            return $no . 'px';
+            return $no.'px';
         }
 
         return '';
@@ -305,7 +305,11 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
      */
     public function create()
     {
-        $this->Events->fireEvent('create', array($this));
+        try {
+            $this->Events->fireEvent('create', [$this]);
+        } catch (QUI\Exception $Exception) {
+            QUI\System\Log::writeException($Exception);
+        }
 
         $render   = '';
         $cssFiles = $this->getCSSFiles();
@@ -315,7 +319,7 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
             foreach ($cssFiles as $cssFile) {
                 $relative = str_replace($quiPath, '', $cssFile);
 
-                $render .= '<style data-file="' . $relative . '" data-qui-module="' . $this->module . '">';
+                $render .= '<style data-file="'.$relative.'" data-qui-module="'.$this->module.'">';
                 $render .= file_get_contents($cssFile);
                 $render .= '</style>';
             }

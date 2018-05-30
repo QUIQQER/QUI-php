@@ -28,7 +28,7 @@ class Button extends QUI\QDOM
      *
      * @var array
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * Disable status
@@ -42,7 +42,7 @@ class Button extends QUI\QDOM
      *
      * @param array $settings
      */
-    public function __construct($settings = array())
+    public function __construct($settings = [])
     {
         $this->setAttribute('type', 'QUI\\Controls\\Buttons\\Button');
         $this->setAttributes($settings);
@@ -94,12 +94,17 @@ class Button extends QUI\QDOM
     public function toArray()
     {
         $result          = $this->getAttributes();
-        $result['items'] = array();
+        $result['items'] = [];
 
         foreach ($this->items as $Itm) {
-            /* @var $Itm QUI\Controls\Contextmenu\Menuitem */
-            $Itm->addParent($this);
-            $result['items'][] = $Itm->toArray();
+            try {
+                /* @var $Itm QUI\Controls\Contextmenu\Menuitem */
+                $Itm->addParent($this);
+
+                $result['items'][] = $Itm->toArray();
+            } catch (QUI\Exception $Exception) {
+                QUI\System\Log::writeException($Exception);
+            }
         }
 
         return $result;

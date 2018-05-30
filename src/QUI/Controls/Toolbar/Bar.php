@@ -20,14 +20,14 @@ class Bar
      *
      * @var array
      */
-    private $settings = array();
+    private $settings = [];
 
     /**
      * all subitems from the toolbar
      *
      * @var array
      */
-    private $items = array();
+    private $items = [];
 
     /**
      * constructor
@@ -75,7 +75,7 @@ class Bar
      */
     public function clear()
     {
-        return $this->settings['name'] . '.clear();';
+        return $this->settings['name'].'.clear();';
     }
 
     /**
@@ -95,9 +95,9 @@ class Bar
      */
     public function create()
     {
-        $jsString = 'var ' . $this->settings['name'] . ' = ' . $this->jsObject();
-        $jsString .= 'document.getElementById("' . $this->settings['parent']
-                     . '").appendChild(' . $this->settings['name'] . '.create());';
+        $jsString = 'var '.$this->settings['name'].' = '.$this->jsObject();
+        $jsString .= 'document.getElementById("'.$this->settings['parent']
+                     .'").appendChild('.$this->settings['name'].'.create());';
 
         return $jsString;
     }
@@ -113,16 +113,16 @@ class Bar
 
         foreach ($this->settings as $s => $value) {
             if ($s != 'name') {
-                $jsString .= $s . ' : "' . $value . '",';
+                $jsString .= $s.' : "'.$value.'",';
             }
         }
 
-        $jsString .= 'name : "' . $this->settings['name'] . '"';
-        $jsString .= '});' . "\n";
+        $jsString .= 'name : "'.$this->settings['name'].'"';
+        $jsString .= '});'."\n";
 
         foreach ($this->items as $itm) {
             $itm->addParent($this);
-            $jsString .= $itm->create() . "\n";
+            $jsString .= $itm->create()."\n";
         }
 
         return $jsString;
@@ -214,7 +214,7 @@ class Bar
      */
     public function toArray()
     {
-        $result = array();
+        $result = [];
 
         foreach ($this->items as $Itm) {
             $result[] = $Itm->getAllAttributes();
