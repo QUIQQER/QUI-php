@@ -13,7 +13,6 @@ use QUI;
  * Baut eine Sitemap
  *
  * @author www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.sitemap
  */
 class Map extends QUI\QDOM
 {

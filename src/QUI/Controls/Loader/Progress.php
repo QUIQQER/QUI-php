@@ -10,8 +10,6 @@ use QUI;
 
 /**
  * Class Progress
- *
- * @package QUI\Controls\Loader
  */
 class Progress extends QUI\Controls\Control
 {

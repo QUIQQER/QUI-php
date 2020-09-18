@@ -13,7 +13,6 @@ use QUI;
  * Erstellt ein Optionfeld in einem _ptools Select Objekt
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.select
  *
  * @todo    we need that?
  */

@@ -12,7 +12,6 @@ use QUI;
  * ContextMenuItem
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.contextmenu
  */
 class Menuitem extends QUI\QDOM
 {

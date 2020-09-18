@@ -12,7 +12,6 @@ use QUI;
  * Button Separator
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.buttons
  */
 class Separator extends QUI\QDOM
 {

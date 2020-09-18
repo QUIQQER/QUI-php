@@ -12,7 +12,6 @@ use QUI;
  * ContextBar
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.php.controls.contextmenu
  */
 class Bar extends QUI\QDOM
 {
