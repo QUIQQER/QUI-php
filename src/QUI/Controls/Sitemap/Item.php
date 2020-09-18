@@ -13,7 +13,6 @@ use QUI;
  * Erstellt ein Sitemap Eintrag
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.sitemap
  */
 class Item extends QUI\QDOM
 {

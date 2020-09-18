@@ -13,7 +13,6 @@ use QUI\Controls\Buttons\Button;
  * Window control class
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.windows
  */
 class Window extends QUI\QDOM
 {

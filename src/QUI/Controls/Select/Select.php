@@ -13,7 +13,6 @@ use QUI;
  * Erstellt eine Selectbox
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.select
  *
  * @todo    we need that?
  */

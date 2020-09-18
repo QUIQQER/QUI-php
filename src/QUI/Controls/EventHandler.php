@@ -10,8 +10,6 @@ use QUI;
 
 /**
  * Class Control
- *
- * @package QUI\Controls
  */
 class EventHandler
 {

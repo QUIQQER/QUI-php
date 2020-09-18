@@ -12,7 +12,6 @@ use QUI;
  * A Toolbar Tab
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.toolbar
  */
 class Tab extends QUI\QDOM
 {

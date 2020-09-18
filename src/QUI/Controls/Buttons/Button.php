@@ -12,7 +12,6 @@ use QUI;
  * QUI Button
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.buttons
  */
 class Button extends QUI\QDOM
 {

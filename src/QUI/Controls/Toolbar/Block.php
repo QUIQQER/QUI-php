@@ -12,7 +12,6 @@ use QUI;
  * Toolbar Block
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.toolbar
  */
 class Block extends QUI\QDOM
 {

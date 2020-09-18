@@ -8,8 +8,6 @@ namespace QUI\Interfaces;
 
 /**
  * Class Control
- *
- * @package QUI\Controls
  */
 interface Control
 {

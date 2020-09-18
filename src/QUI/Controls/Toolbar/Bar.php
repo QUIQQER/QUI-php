@@ -10,9 +10,7 @@ namespace QUI\Controls\Toolbar;
  * Toolbar Bar
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.toolbar
  */
-
 class Bar
 {
     /**

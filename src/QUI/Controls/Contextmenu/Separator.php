@@ -12,7 +12,6 @@ use QUI;
  * \QUI\Controls\Contextmenu\Separator
  *
  * @author  www.pcsg.de (Henning Leutz)
- * @package com.pcsg.qui.controls.contextmenu
  */
 class Separator extends QUI\QDOM
 {

@@ -10,8 +10,6 @@ use QUI;
 
 /**
  * Class Control
- *
- * @package QUI\Controls
  */
 abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
 {
@@ -91,10 +89,10 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
     /**
      * (non-PHPdoc)
      *
-     * @see \QUI\Interfaces\Events::addEvent()
-     *
      * @param string $event - The type of event (e.g. 'complete').
      * @param callback $fn - The function to execute.
+     * @see \QUI\Interfaces\Events::addEvent()
+     *
      */
     public function addEvent($event, $fn)
     {
@@ -104,9 +102,9 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
     /**
      * (non-PHPdoc)
      *
+     * @param array $events
      * @see \QUI\Interfaces\Events::addEvents()
      *
-     * @param array $events
      */
     public function addEvents(array $events)
     {
@@ -116,10 +114,10 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
     /**
      * (non-PHPdoc)
      *
-     * @see \QUI\Interfaces\Events::removeEvent()
-     *
      * @param string $event - The type of event (e.g. 'complete').
      * @param callback|boolean $fn - (optional) The function to remove.
+     * @see \QUI\Interfaces\Events::removeEvent()
+     *
      */
     public function removeEvent($event, $fn = false)
     {
@@ -129,9 +127,9 @@ abstract class Control extends QUI\QDOM implements QUI\Interfaces\Control
     /**
      * (non-PHPdoc)
      *
+     * @param array $events - (optional) If not passed removes all events of all types.
      * @see \QUI\Interfaces\Events::removeEvents()
      *
-     * @param array $events - (optional) If not passed removes all events of all types.
      */
     public function removeEvents(array $events)
     {
